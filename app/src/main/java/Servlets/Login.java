@@ -33,7 +33,9 @@ public class Login extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("webapp/WEB-INF/login.jsp");
+        RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
+        requestDispatcher.include(request, response);
+        
 
     }
 
@@ -42,10 +44,8 @@ public class Login extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("webapp/WEB-INF/login.jsp");
-      
-
+        System.out.println("Je passe ici (post)");
+        
     }
 
 }
