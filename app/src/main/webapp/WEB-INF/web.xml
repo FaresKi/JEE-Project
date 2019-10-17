@@ -13,4 +13,7 @@
         <servlet-name>Login</servlet-name>
         <jsp-file>/login.jsp</jsp-file>
     </servlet>
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
