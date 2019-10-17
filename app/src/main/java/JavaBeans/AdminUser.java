@@ -9,6 +9,6 @@ package JavaBeans;
  *
  * @author fareskissoum
  */
-public class AdminUser {
+public class AdminUser extends User {
     
 }
