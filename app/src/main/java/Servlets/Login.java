@@ -1,13 +1,14 @@
 package Servlets;
 
+import JavaBeans.AdminUser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Login
@@ -35,8 +36,6 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
         requestDispatcher.forward(request, response);
-        
-    
 
     }
 
@@ -47,18 +46,18 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
         requestDispatcher.include(request, response);
-        
+
         String userName = (String) request.getParameter("login");
         String password = (String) request.getParameter("password");
-        System.out.println("Login : " + userName);
-        
-        if(userName.equals("admin") && password.equals("admin")){
-            response.sendRedirect(request.getContextPath()+"/home.jsp");
+        HttpSession session = request.getSession();
+
+        if (userName.equals("admin") && password.equals("admin")) {
+
+            AdminUser admin = new AdminUser(userName, password);
+            session.setAttribute("admin", admin);
+            response.sendRedirect(request.getContextPath()+ "/admin");
         }
-        
-        
-        
-        
+
     }
 
 }

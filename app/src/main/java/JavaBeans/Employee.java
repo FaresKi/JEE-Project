@@ -20,6 +20,10 @@ public class Employee extends User {
     String ville;
     String email;
 
+    public Employee(String userName, String password) {
+        super(userName, password);
+    }
+
     public String getNom() {
         return nom;
     }
@@ -91,6 +95,20 @@ public class Employee extends User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Employee(String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email, String userName, String password) {
+        super(userName, password);
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telDomicile = telDomicile;
+        this.telPortable = telPortable;
+        this.telPro = telPro;
+        this.adresse = adresse;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.email = email;
+    }
+    
     
     
     
