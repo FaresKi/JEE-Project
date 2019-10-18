@@ -34,8 +34,9 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
-        requestDispatcher.include(request, response);
+        requestDispatcher.forward(request, response);
         
+    
 
     }
 
@@ -44,7 +45,19 @@ public class Login extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Je passe ici (post)");
+        RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
+        requestDispatcher.include(request, response);
+        
+        String userName = (String) request.getParameter("login");
+        String password = (String) request.getParameter("password");
+        System.out.println("Login : " + userName);
+        
+        if(userName.equals("admin") && password.equals("admin")){
+            response.sendRedirect(request.getContextPath()+"/home.jsp");
+        }
+        
+        
+        
         
     }
 

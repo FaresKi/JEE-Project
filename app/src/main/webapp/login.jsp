@@ -9,11 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login Page</title>
     </head>
     <body>
         <h1>Login</h1>
-        <form action="guru_register" method="post">
+        <form method="post">
             <table style="with: 50%">
                 <tr>
                     <td>Login</td>

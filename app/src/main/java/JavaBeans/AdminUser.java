@@ -11,4 +11,5 @@ package JavaBeans;
  */
 public class AdminUser extends User {
     
+    
 }
