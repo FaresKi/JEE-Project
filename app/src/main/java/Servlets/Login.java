@@ -29,9 +29,14 @@ public class Login extends HttpServlet {
     }
 
     /**
+     * @param request
+     * @param response
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      * response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
@@ -40,13 +45,16 @@ public class Login extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponseƒ
+     * @param request
+     * @param response
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
      * response)
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
-        requestDispatcher.include(request, response);
-
+       
         String userName = (String) request.getParameter("login");
         String password = (String) request.getParameter("password");
         HttpSession session = request.getSession();
@@ -56,6 +64,9 @@ public class Login extends HttpServlet {
             AdminUser admin = new AdminUser(userName, password);
             session.setAttribute("admin", admin);
             response.sendRedirect(request.getContextPath()+ "/admin");
+        }
+        else{
+            response.sendRedirect(request.getContextPath()+ "/login");
         }
 
     }

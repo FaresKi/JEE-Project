@@ -32,9 +32,12 @@
                 <th>EMAIL</th>
             </tr>
         </table>
-        <form action="add.jsp">
-             <input type="submit" value="Ajouter" />
+        <form method="post">
+             <input type="submit" value="Ajouter"/>
         </form>
+        
+           
+       
         
         
     </body>

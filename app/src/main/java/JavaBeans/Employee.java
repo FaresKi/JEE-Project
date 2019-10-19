@@ -108,8 +108,6 @@ public class Employee extends User {
         this.ville = ville;
         this.email = email;
     }
-    
-    
-    
+   
     
 }

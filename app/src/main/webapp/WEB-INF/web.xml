@@ -8,12 +8,16 @@
         <servlet-name>Home</servlet-name>
         <servlet-class>Servlets.Home</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Add</servlet-name>
+        <servlet-class>Servlets.Add</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/admin.jsp</welcome-file>
+        <welcome-file>admin</welcome-file>
     </welcome-file-list>
 </web-app>
