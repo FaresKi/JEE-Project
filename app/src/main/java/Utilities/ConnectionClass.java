@@ -9,9 +9,7 @@ import JavaBeans.Employee;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -24,13 +22,14 @@ import java.util.logging.Logger;
  */
 public class ConnectionClass {
 
-    public List<Employee> employeList = new ArrayList();
+    private List<Employee> employeList = new ArrayList();
+    
 
     String hostName = "jdbc:derby://localhost:1527/JEEPRJ";
     Properties properties = new Properties();
 
     public ConnectionClass() throws SQLException, ClassNotFoundException {
-        ;
+        
 
     }
 
@@ -40,6 +39,7 @@ public class ConnectionClass {
 
         properties.put("user", "jee");
         properties.put("password", "jee");
+         Employee emp ;
         try {
             Connection con = DriverManager.getConnection(hostName, properties);
             PreparedStatement pstmt = con.prepareStatement(query);
@@ -54,9 +54,10 @@ public class ConnectionClass {
             pstmt.setString(9, email);
 
             pstmt.executeUpdate();
-            Employee emp = new Employee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email, null, null);
-            
-            employeList.add(emp);
+            emp = new Employee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email, null, null);
+             
+            this.employeList.add(emp);
+            System.out.println("taille liste : " + employeList.size());
            
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,10 +66,15 @@ public class ConnectionClass {
 
     public static void main(String[] args) throws ClassNotFoundException {
         try {
-            new ConnectionClass();
+            ConnectionClass connectionClass = new ConnectionClass();
+            System.out.println("Size : " + connectionClass.getEmployeList().size() );
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionClass.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<Employee> getEmployeList() {
+        return employeList;
     }
 
 }

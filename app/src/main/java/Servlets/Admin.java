@@ -5,21 +5,28 @@
  */
 package Servlets;
 
+import JavaBeans.Employee;
 import Utilities.ConnectionClass;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author fareskissoum
+ * @author fareskissoum Servlet pour afficher la liste des employés
  */
-@WebServlet(urlPatterns = {"/add"})
-public class Add extends HttpServlet {
+@WebServlet(name = "Admin", urlPatterns = {"/admin"})
+public class Admin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,32 +39,7 @@ public class Add extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("/add.jsp").include(request, response);
-
-        String nom = (String) request.getParameter("nom");
-        String prenom = (String) request.getParameter("prenom");
-        String teldom = (String) request.getParameter("teldom");
-        String telport = (String) request.getParameter("telport");
-        String telpro = (String) request.getParameter("telpro");
-        String adresse = (String) request.getParameter("adresse");
-        String codePostal = (String) request.getParameter("codepostal");
-        String ville = (String) request.getParameter("ville");
-        String email = (String) request.getParameter("email");
-
-        if (nom != null) {
-            try {
-                ConnectionClass connection = new ConnectionClass();
-                connection.addNewEmployee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email);
-                response.sendRedirect(request.getContextPath() + "/admin");
-            } catch (SQLException ex) {
-                System.out.println("exception sql");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("exception class");
-            }
-        }
     }
-       
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -71,8 +53,22 @@ public class Add extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-
+        response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/admin.jsp");
+        if (request.getSession().getAttribute("admin") != null) {
+            ConnectionClass connection;
+            try {
+                connection = new ConnectionClass();
+                HttpSession session = request.getSession();
+                List<Employee> emp = connection.getEmployeList();
+                session.setAttribute("list", emp);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            requestDispatcher.include(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login");
+        }
     }
 
     /**
@@ -86,7 +82,24 @@ public class Add extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.getServletContext().getRequestDispatcher("/admin.jsp");
+
+        String delete = request.getParameter("delete");
+        String modify = request.getParameter("modify");
+
+        if (request.getParameter("add") != null) {
+            response.sendRedirect(request.getContextPath() + "/add");
+        }
+
+        if (request.getParameter("delete") != null) {
+            response.sendRedirect(request.getContextPath() + "/delete");
+        }
+
+        if (request.getParameter("modify") != null) {
+            response.sendRedirect(request.getContextPath() + "/modify");
+        }
+
     }
 
     /**

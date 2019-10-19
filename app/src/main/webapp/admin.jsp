@@ -4,17 +4,22 @@
     Author     : fareskissoum
 --%>
 
+<%@page import="Utilities.ConnectionClass"%>
+<%@page import="java.util.List"%>
+<%@page import="JavaBeans.Employee"%>
+<%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Administration des employés</title>
         <style>
-         table, th, td {
-            border: 1px solid black;
-         }
-      </style>
+            table, th, td {
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
         <h1>Liste des employés</h1>
@@ -31,14 +36,55 @@
                 <th>VILLE</th>
                 <th>EMAIL</th>
             </tr>
+            <%
+                List<Employee> list = new ConnectionClass().getEmployeList();
+            %>
+
+
+            <c:forEach items="${list}" var="emp">
+
+
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <input type="radio" name="select">
+                        </div>
+                    </td>
+                    <td>
+                        <c:out value="${emp.nom}"/>
+                    </td>
+                    <td>
+                        <c:out value="${emp.prenom}"/>
+                    </td>
+                    <td>
+                        <c:out value="${emp.telDomicile}" />
+                    </td>
+                    <td>
+                        <c:out value="${emp.telPortable}" />
+                    </td>
+                    <td>
+                        <c:out value="${emp.telPro}" />
+                    </td>
+                    <td>
+                        <c:out value="${emp.adresse}" />
+                    </td>
+                    <td>
+                        <c:out value="${emp.codePostal}" />
+                    </td>
+                    <td>
+                        <c:out value="${emp.ville}" />
+                    </td>
+                    <td>
+                        <c:out value="${emp.email}" />
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
         <form method="post">
-             <input type="submit" value="Ajouter"/>
+            <input type="submit" value="Ajouter" name="add"/>
+            <input type="submit" value="Supprimer" name="delete"/>
+            <input type="submit" value="Modifier" name="modify"/>
         </form>
-        
-           
-       
-        
-        
+        <c:out value="${list[0].nom}" default="fuck"/>
     </body>
 </html>

@@ -15,8 +15,8 @@
         <h1>Ajout d'un Employé</h1>
     </body>
     
-    <form method="post" >
-    <div>
+     <form method="post"  >
+     <div>
         <label for="name">Nom :</label>
         <input type="text" id="name" name="nom">
     </div>
@@ -53,7 +53,7 @@
         <input type="email" id="mail" name="email">
     </div>
         
-        <input type="submit" value="Ajouter"   />
+        <input type="submit" value="Ajouter" />
 </form>
     
     
