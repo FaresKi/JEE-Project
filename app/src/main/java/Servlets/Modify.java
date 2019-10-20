@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
-
+package Servlets; 
+import Utilities.ConnectionClass;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,17 +34,26 @@ public class Modify extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Modify</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Modify at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        request.getRequestDispatcher("/modify.jsp").include(request, response);
+        String nom = (String) request.getParameter("nom");
+        String prenom = (String) request.getParameter("prenom");
+        String teldom = (String) request.getParameter("teldom");
+        String telport = (String) request.getParameter("telport");
+        String telpro = (String) request.getParameter("telpro");
+        String adresse = (String) request.getParameter("adresse");
+        String codePostal = (String) request.getParameter("codepostal");
+        String ville = (String) request.getParameter("ville");
+        String email = (String) request.getParameter("email");
+        try {
+            ConnectionClass connection = new ConnectionClass();
+            String select = (String) request.getSession().getAttribute("select");
+            if(nom!=null){
+                connection.updateEmployee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email, select);
+                response.sendRedirect(request.getContextPath() + "/admin");
+
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Modify.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

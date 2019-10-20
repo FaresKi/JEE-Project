@@ -16,10 +16,6 @@
         <servlet-name>Modify</servlet-name>
         <servlet-class>Servlets.Modify</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Delete</servlet-name>
-        <servlet-class>Servlets.Delete</servlet-class>
-    </servlet>
     <session-config>
         <session-timeout>
             30

@@ -5,11 +5,15 @@
  */
 package JavaBeans;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author fareskissoum
  */
-public class Employee extends User {
+public class Employee implements Serializable {
     String nom;
     String prenom;
     String telDomicile;
@@ -19,10 +23,8 @@ public class Employee extends User {
     String codePostal;
     String ville;
     String email;
+    private List<Employee> employeList = new ArrayList<>();
 
-    public Employee(String userName, String password) {
-        super(userName, password);
-    }
 
     public String getNom() {
         return nom;
@@ -96,8 +98,7 @@ public class Employee extends User {
         this.email = email;
     }
 
-    public Employee(String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email, String userName, String password) {
-        super(userName, password);
+    public Employee(String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.telDomicile = telDomicile;
@@ -108,6 +109,6 @@ public class Employee extends User {
         this.ville = ville;
         this.email = email;
     }
-   
+    
     
 }

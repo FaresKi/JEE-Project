@@ -23,6 +23,7 @@
     </head>
     <body>
         <h1>Liste des employés</h1>
+        <form method="post">
         <table>
             <tr>
                 <th>Sel</th>
@@ -36,18 +37,12 @@
                 <th>VILLE</th>
                 <th>EMAIL</th>
             </tr>
-            <%
-                List<Employee> list = new ConnectionClass().getEmployeList();
-            %>
-
-
             <c:forEach items="${list}" var="emp">
-
-
+                
                 <tr>
                     <td>
                         <div class="radio">
-                            <input type="radio" name="select">
+                            <input type="radio" name="select" value="${emp.nom}">
                         </div>
                     </td>
                     <td>
@@ -80,11 +75,9 @@
                 </tr>
             </c:forEach>
         </table>
-        <form method="post">
             <input type="submit" value="Ajouter" name="add"/>
             <input type="submit" value="Supprimer" name="delete"/>
             <input type="submit" value="Modifier" name="modify"/>
         </form>
-        <c:out value="${list[0].nom}" default="fuck"/>
     </body>
 </html>

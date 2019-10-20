@@ -9,8 +9,8 @@ import JavaBeans.Employee;
 import Utilities.ConnectionClass;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -59,9 +59,9 @@ public class Admin extends HttpServlet {
             ConnectionClass connection;
             try {
                 connection = new ConnectionClass();
+                List<Employee> list = connection.getAllEmployees();
                 HttpSession session = request.getSession();
-                List<Employee> emp = connection.getEmployeList();
-                session.setAttribute("list", emp);
+                session.setAttribute("list", list);
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -93,13 +93,31 @@ public class Admin extends HttpServlet {
         }
 
         if (request.getParameter("delete") != null) {
-            response.sendRedirect(request.getContextPath() + "/delete");
+            ConnectionClass connection;
+            try {
+                connection = new ConnectionClass();
+                String select = (String) request.getParameter("select");
+                System.out.println("Select : " + select);
+                connection.deleteEmployee(select);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            response.sendRedirect(request.getContextPath() + "/admin");
         }
 
         if (request.getParameter("modify") != null) {
-            response.sendRedirect(request.getContextPath() + "/modify");
+            ConnectionClass connection;
+            try {
+                connection = new ConnectionClass();
+                String select = (String) request.getParameter("select");
+                Employee changedEmp = connection.getSpecificEmployee(select);
+                request.getSession().setAttribute("changedEmp",changedEmp);
+                request.getSession().setAttribute("select", select);
+                response.sendRedirect(request.getContextPath() + "/modify");
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
     }
 
     /**
