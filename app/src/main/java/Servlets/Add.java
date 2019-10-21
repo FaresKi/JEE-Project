@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/add"})
 public class Add extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -48,15 +49,20 @@ public class Add extends HttpServlet {
             try {
                 ConnectionClass connection = new ConnectionClass();
                 connection.addNewEmployee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email);
-                response.sendRedirect(request.getContextPath() + "/admin");
+                if (request.getParameter("retour") != null) {
+                    response.sendRedirect(request.getContextPath() + "/admin");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/admin");
+                }
+
             } catch (SQLException ex) {
                 System.out.println("exception sql");
             } catch (ClassNotFoundException ex) {
                 System.out.println("exception class");
             }
         }
+
     }
-       
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

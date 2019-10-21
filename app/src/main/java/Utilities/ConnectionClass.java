@@ -135,11 +135,8 @@ public class ConnectionClass {
         pstmt.setString(8, ville);
         pstmt.setString(9, email);
         pstmt.setString(10, selectName);
-        
-        System.out.println("test query : " +  pstmt.toString());
-        pstmt.executeUpdate();
-        
 
+        pstmt.executeUpdate();
 
     }
 

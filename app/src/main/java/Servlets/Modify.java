@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets; 
+package Servlets;
+
 import Utilities.ConnectionClass;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -47,10 +48,15 @@ public class Modify extends HttpServlet {
         try {
             ConnectionClass connection = new ConnectionClass();
             String select = (String) request.getSession().getAttribute("select");
-            if(nom!=null){
-                connection.updateEmployee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email, select);
-                response.sendRedirect(request.getContextPath() + "/admin");
+            if (nom != null) {
 
+                if (request.getParameter("retour") != null) {
+                    response.sendRedirect(request.getContextPath() + "/admin");
+                    
+                } else {
+                    connection.updateEmployee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email, select);
+                    response.sendRedirect(request.getContextPath() + "/admin");
+                }
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Modify.class.getName()).log(Level.SEVERE, null, ex);

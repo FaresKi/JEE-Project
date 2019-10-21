@@ -53,6 +53,7 @@
             </div>
 
             <input type="submit" value="Modifier" />
+            <input type="submit" value="Retour à la liste" name="retour"/>
         </form>
     </body>
 </html>

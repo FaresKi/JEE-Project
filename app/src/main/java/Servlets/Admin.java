@@ -111,7 +111,7 @@ public class Admin extends HttpServlet {
                 connection = new ConnectionClass();
                 String select = (String) request.getParameter("select");
                 Employee changedEmp = connection.getSpecificEmployee(select);
-                request.getSession().setAttribute("changedEmp",changedEmp);
+                request.getSession().setAttribute("changedEmp", changedEmp);
                 request.getSession().setAttribute("select", select);
                 response.sendRedirect(request.getContextPath() + "/modify");
             } catch (SQLException | ClassNotFoundException ex) {

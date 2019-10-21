@@ -14,6 +14,7 @@ import java.util.List;
  * @author fareskissoum
  */
 public class Employee implements Serializable {
+
     String nom;
     String prenom;
     String telDomicile;
@@ -23,8 +24,6 @@ public class Employee implements Serializable {
     String codePostal;
     String ville;
     String email;
-    private List<Employee> employeList = new ArrayList<>();
-
 
     public String getNom() {
         return nom;
@@ -109,6 +108,5 @@ public class Employee implements Serializable {
         this.ville = ville;
         this.email = email;
     }
-    
-    
+
 }

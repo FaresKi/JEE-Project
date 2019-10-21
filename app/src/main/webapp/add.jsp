@@ -13,48 +13,47 @@
     </head>
     <body>
         <h1>Ajout d'un Employé</h1>
-   
-     <form method="post">
-     <div>
-        <label for="name">Nom :</label>
-        <input type="text" id="name" name="nom">
-    </div>
-    <div>
-        <label for="name">Prénom :</label>
-        <input type="text" id="name" name="prenom">
-    </div>
-     <div>
-        <label for="name">Téléphone de domicile :</label>
-        <input type="text" id="name" name="teldom">
-    </div>    
-     <div>
-        <label for="name">Téléphone portable :</label>
-        <input type="text" id="name" name="telport">
-    </div>    
-     <div>
-        <label for="name">Téléphone professionnel :</label>
-        <input type="text" id="name" name="telpro">
-    </div>
-     <div>
-        <label for="name">Adresse :</label>
-        <input type="text" id="name" name="adresse">
-    </div>
-     <div>
-        <label for="name">Code Postal :</label>
-        <input type="text" id="name" name="codepostal">
-    </div>
-     <div>
-        <label for="name">Ville :</label>
-        <input type="text" id="name" name="ville">
-    </div>
-    <div>
-        <label for="mail">e-mail :</label>
-        <input type="email" id="mail" name="email">
-    </div>
-        
-        <input type="submit" value="Ajouter" />
-</form>
-     </body>
-    
-    
+        <form method="post">
+            <div>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="nom">
+            </div>
+            <div>
+                <label for="name">Prénom :</label>
+                <input type="text" id="name" name="prenom">
+            </div>
+            <div>
+                <label for="name">Téléphone de domicile :</label>
+                <input type="text" id="name" name="teldom">
+            </div>    
+            <div>
+                <label for="name">Téléphone portable :</label>
+                <input type="text" id="name" name="telport">
+            </div>    
+            <div>
+                <label for="name">Téléphone professionnel :</label>
+                <input type="text" id="name" name="telpro">
+            </div>
+            <div>
+                <label for="name">Adresse :</label>
+                <input type="text" id="name" name="adresse">
+            </div>
+            <div>
+                <label for="name">Code Postal :</label>
+                <input type="text" id="name" name="codepostal">
+            </div>
+            <div>
+                <label for="name">Ville :</label>
+                <input type="text" id="name" name="ville">
+            </div>
+            <div>
+                <label for="mail">e-mail :</label>
+                <input type="email" id="mail" name="email">
+            </div>
+
+            <input type="submit" value="Ajouter" />
+            <input type="submit" value="Retour à la liste" name="retour"/>
+
+        </form>
+    </body>
 </html>
