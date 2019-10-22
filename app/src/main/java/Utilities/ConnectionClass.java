@@ -5,7 +5,9 @@ package Utilities;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import JavaBeans.AdminUser;
 import JavaBeans.Employee;
+import JavaBeans.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -137,6 +139,28 @@ public class ConnectionClass {
         pstmt.setString(10, selectName);
 
         pstmt.executeUpdate();
+
+    }
+
+    public User getUser(String userName, String password) throws SQLException {
+        String query = "SELECT PASSWORD,ADMIN FROM UTILISATEUR WHERE USERNAME = ?";
+        properties.put("user", "jee");
+        properties.put("password", "jee");
+
+        Connection con = DriverManager.getConnection(hostName, properties);
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, userName);
+        User user = null;
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            if (password.equals(rs.getString("PASSWORD"))) {
+                if (rs.getBoolean("ADMIN")) {
+                    return new AdminUser(userName, password);
+                }
+                return new User(userName, password);
+            }
+        }
+        return user;
 
     }
 

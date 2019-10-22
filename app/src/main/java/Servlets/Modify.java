@@ -52,7 +52,6 @@ public class Modify extends HttpServlet {
 
                 if (request.getParameter("retour") != null) {
                     response.sendRedirect(request.getContextPath() + "/admin");
-                    
                 } else {
                     connection.updateEmployee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email, select);
                     response.sendRedirect(request.getContextPath() + "/admin");
