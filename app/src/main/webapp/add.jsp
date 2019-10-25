@@ -16,39 +16,39 @@
         <form method="post">
             <div>
                 <label for="name">Nom :</label>
-                <input type="text" id="name" name="nom">
+                <input type="text" id="name" name="addNom">
             </div>
             <div>
                 <label for="name">Prénom :</label>
-                <input type="text" id="name" name="prenom">
+                <input type="text" id="name" name="addPrenom">
             </div>
             <div>
                 <label for="name">Téléphone de domicile :</label>
-                <input type="text" id="name" name="teldom">
+                <input type="text" id="name" name="addTeldom">
             </div>    
             <div>
                 <label for="name">Téléphone portable :</label>
-                <input type="text" id="name" name="telport">
+                <input type="text" id="name" name="addTelport">
             </div>    
             <div>
                 <label for="name">Téléphone professionnel :</label>
-                <input type="text" id="name" name="telpro">
+                <input type="text" id="name" name="addTelpro">
             </div>
             <div>
                 <label for="name">Adresse :</label>
-                <input type="text" id="name" name="adresse">
+                <input type="text" id="name" name="addAdresse">
             </div>
             <div>
                 <label for="name">Code Postal :</label>
-                <input type="text" id="name" name="codepostal">
+                <input type="text" id="name" name="addCodePostal">
             </div>
             <div>
                 <label for="name">Ville :</label>
-                <input type="text" id="name" name="ville">
+                <input type="text" id="name" name="addVille">
             </div>
             <div>
                 <label for="mail">e-mail :</label>
-                <input type="email" id="mail" name="email">
+                <input type="email" id="mail" name="addEmail">
             </div>
 
             <input type="submit" value="Ajouter" />
