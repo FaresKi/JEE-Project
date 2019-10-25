@@ -33,7 +33,7 @@
                 <th>VILLE</th>
                 <th>EMAIL</th>
             </tr>
-            <c:forEach items="${list}" var="emp">
+            <c:forEach items="${listEmp}" var="emp">
                 <tr>
                     <td>
                         <c:out value="${emp.nom}"/>
@@ -66,7 +66,7 @@
             </c:forEach>
         </table>
     </body>
-    <form method="post">
+    <form method="post" action="Project">
         <input type="submit" value="Déconnecter" name="logout"/>
     </form>
 </html>

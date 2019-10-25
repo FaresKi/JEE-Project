@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="Project"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,7 +21,7 @@
     </head>
     <body>
         <h1>Liste des employés</h1>
-        <form method="post">
+        <form method="POST" action="Project">
             <table>
                 <tr>
                     <th>Sel</th>
@@ -34,7 +35,7 @@
                     <th>VILLE</th>
                     <th>EMAIL</th>
                 </tr>
-                <c:forEach items="${list}" var="emp">
+                <c:forEach items="${listEmp}" var="emp">
 
                     <tr>
                         <td>
@@ -72,7 +73,8 @@
                     </tr>
                 </c:forEach>
             </table>
-            <input type="submit" value="Ajouter" name="add"/>
+            
+            <input type="submit" value="Ajouter" name="add" />
             <input type="submit" value="Supprimer" name="delete"/>
             <input type="submit" value="Modifier" name="modify"/>
             <input type="submit" value="Déconnecter" name="logout"/>

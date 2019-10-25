@@ -13,17 +13,17 @@
     </head>
     <body>
         <h1>Login</h1>
-        <form method="post">
+        <form method="post" action="Project">
             <table style="with: 50%">
                 <tr>
                     <td>Login</td>
                     <td><input type="text" name="login" /></td>
-		</tr>
-		<tr>
+                </tr>
+                <tr>
                     <td>Password</td>
                     <td><input type="password" name="password" /></td>
-		</tr>
+                </tr>
             </table>
-            <input type="submit" value="Submit" /></form>
+            <input type="submit" name="action" value="Submit"/></form>
     </body>
 </html>
