@@ -88,8 +88,9 @@ public class Project extends HttpServlet {
             connection.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
             if (request.getParameter("retour") != null && session.getAttribute("admin") != null) {
                 response.sendRedirect("admin.jsp");
-
             } else if (session.getAttribute("admin") != null) {
+                list = connection.getAllEmployees();
+                session.setAttribute("listEmp", list);
                 response.sendRedirect("admin.jsp");
             }
         }
@@ -131,6 +132,8 @@ public class Project extends HttpServlet {
             response.sendRedirect("admin.jsp");
 
         }
+
+        //Suppression
         if (request.getParameter("delete") != null) {
             String select = (String) request.getParameter("select");
             connection.deleteEmployee(select);
