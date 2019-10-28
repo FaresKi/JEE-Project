@@ -5,14 +5,28 @@
  */
 package JavaBeans;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author fareskissoum
  */
+
+@Entity
+@Table(name="UTILISATEUR")
 public class User {
-    
+
+    @Id
     private String userName;
+
     private String password;
+
+    public User() {
+
+    }
+
 
     public String getUserName() {
         return userName;
@@ -34,6 +48,7 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
+
     
     
     

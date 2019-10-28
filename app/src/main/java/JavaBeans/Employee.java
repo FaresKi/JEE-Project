@@ -5,6 +5,7 @@
  */
 package JavaBeans;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,14 @@ import java.util.List;
  *
  * @author fareskissoum
  */
+
+@Entity
+@Table(name="EMPLOYE")
 public class Employee implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    String id;
 
     String nom;
     String prenom;
@@ -24,6 +32,10 @@ public class Employee implements Serializable {
     String codePostal;
     String ville;
     String email;
+
+    public Employee() {
+
+    }
 
     public String getNom() {
         return nom;
@@ -109,4 +121,12 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public String getId() {
+        return id;
+    }
 }
