@@ -9,6 +9,8 @@ import JavaBeans.AdminUser;
 import JavaBeans.Employee;
 import JavaBeans.User;
 import Utilities.ConnectionClass;
+import Utilities.JPAUtil;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,6 +34,7 @@ public class Project extends HttpServlet {
 
     HttpSession session;
     ConnectionClass connection;
+    JPAUtil jpaUtil = new JPAUtil();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,7 +54,8 @@ public class Project extends HttpServlet {
         String password = (String) request.getParameter("password");
         connection = new ConnectionClass();
         session = request.getSession();
-        List<Employee> list = connection.getAllEmployees();
+        //List<Employee> list = connection.getAllEmployees();
+        List<Employee> list = jpaUtil.getAllEmployees();
         session.setAttribute("listEmp", list);
         if (userName != null) {
             if (connection.getUser(userName, password).getClass() == AdminUser.class) {

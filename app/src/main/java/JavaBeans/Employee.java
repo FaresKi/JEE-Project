@@ -21,7 +21,7 @@ public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    String id;
+    int id;
 
     String nom;
     String prenom;
@@ -121,12 +121,12 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

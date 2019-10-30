@@ -5,17 +5,16 @@
  */
 package JavaBeans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- *
  * @author fareskissoum
  */
-
 @Entity
-@Table(name="UTILISATEUR")
+@Table(name = "UTILISATEUR")
 public class User {
 
     @Id
@@ -25,6 +24,12 @@ public class User {
 
     public User() {
 
+    }
+
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
     }
 
 
@@ -44,12 +49,5 @@ public class User {
         this.password = password;
     }
 
-    public User(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
 
-    
-    
-    
 }

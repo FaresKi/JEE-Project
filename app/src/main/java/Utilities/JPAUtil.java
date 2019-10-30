@@ -5,11 +5,14 @@
  */
 package Utilities;
 
+import JavaBeans.AdminUser;
 import JavaBeans.Employee;
+import JavaBeans.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +22,7 @@ public class JPAUtil {
 
     private static final String PERSISTENCE_UNIT_NAME = "PERSISTENCE";
     private static EntityManagerFactory factory;
-    private EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+    private static EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 
     public static EntityManagerFactory getEntityManagerFactory() {
         if (factory == null) {
@@ -36,15 +39,34 @@ public class JPAUtil {
 
     public static void main(String[] args) {
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        //entityManager.getTransaction().begin();
+
+        /*
+        Employee emp = new Employee("test","test","","","","","","","");
         entityManager.getTransaction().begin();
+        entityManager.persist(emp);
+        entityManager.getTransaction().commit();
+
+
+        List<Employee> employees = new ArrayList<>();
+        String queryAllEmployees = "SELECT * FROM EMPLOYE";
+        employees = entityManager.createNativeQuery(queryAllEmployees, Employee.class).getResultList();
+        for (Employee empTest : employees) {
+            System.out.println("Nom : " + empTest.getNom());
+        }
+         */
+
+        String admin = "admin";
+        User user = entityManager.find(User.class,admin);
+        System.out.println("username : " + user.getUserName());
 
         // Check database version
         String sql = "select version()";
-
+        /*
         String result = (String) entityManager.createNativeQuery(sql).getSingleResult();
         System.out.println(result);
-
-        entityManager.getTransaction().commit();
+         */
+        //entityManager.getTransaction().commit();
         entityManager.close();
 
         JPAUtil.shutdown();
@@ -52,36 +74,64 @@ public class JPAUtil {
 
     public void addNewEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email) {
 
-        String queryAddNewEmployee = "INSERT INTO EMPLOYE (NOM, PRENOM, TELDOMICILE, TELPORTABLE, TELPRO, ADRESSE, CODEPOSTAL, VILLE, EMAIL) VALUES(?,?,?,?,?,?,?,?,?)";
-        entityManager.createNativeQuery(queryAddNewEmployee)
-                .setParameter(1, nom)
-                .setParameter(2, prenom)
-                .setParameter(3, teldom)
-                .setParameter(4, telport)
-                .setParameter(5, telpro)
-                .setParameter(6, adresse)
-                .setParameter(7, codePostal)
-                .setParameter(8, ville)
-                .setParameter(9, email)
-                .executeUpdate();
+        Employee emp = new Employee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email);
+        entityManager.getTransaction().begin();
+        entityManager.persist(emp);
+        entityManager.getTransaction().commit();
     }
 
     public List<Employee> getAllEmployees() {
         String queryAllEmployees = "SELECT * FROM EMPLOYE";
-        return entityManager.createNativeQuery(queryAllEmployees).getResultList();
+        return entityManager.createNativeQuery(queryAllEmployees, Employee.class).getResultList();
     }
 
-    public void deleteEmployee(int id){
+    public void deleteEmployee(int id) {
         String queryDeleteEmployee = "DELETE FROM EMPLOYE WHERE ID=?";
         entityManager.createNativeQuery(queryDeleteEmployee)
-                .setParameter(1,id)
+                .setParameter(1, id)
                 .executeUpdate();
     }
-    public Employee getSpecificEmployee(int id){
-        String queryGetSpecificEmployee = "SELECT * FROM EMPLOYE WHERE ID=?";
-       return (Employee) entityManager.createNativeQuery(queryGetSpecificEmployee)
-                .setParameter(1,id)
-                .getSingleResult();
+
+    public void updateEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email, int id) {
+
+        Employee emp = entityManager.find(Employee.class, id);
+        entityManager.getTransaction().begin();
+        emp.setNom(nom);
+        emp.setPrenom(prenom);
+        emp.setTelDomicile(teldom);
+        emp.setTelPortable(telport);
+        emp.setTelPro(telpro);
+        emp.setAdresse(adresse);
+        emp.setCodePostal(codePostal);
+        emp.setVille(ville);
+        emp.setEmail(email);
+        entityManager.getTransaction().commit();
+    }
+
+    public  Employee getSpecificEmployee(int id) {
+        return entityManager.find(Employee.class, id);
+    }
+
+
+    public  User getUser(String userName, String password) {
+
+        User user = entityManager.find(User.class,userName);
+        if(user==null){
+            System.out.println("null merde");
+        }
+        if (password.equals(user.getPassword())) {
+            System.out.println("good password");
+            String query = "SELECT ADMIN FROM UTILISATEUR WHERE USERNAME = ?";
+            int isAdmin = (int) entityManager.createNativeQuery(query, Integer.class)
+                    .setParameter(1, userName)
+                    .getSingleResult();
+            if (isAdmin==1) {
+                AdminUser adminUser = (AdminUser) user;
+                return adminUser;
+            }
+            return user;
+        }
+        return user;
 
     }
 
