@@ -54,8 +54,8 @@ public class Project extends HttpServlet {
         String password = (String) request.getParameter("password");
         connection = new ConnectionClass();
         session = request.getSession();
-        //List<Employee> list = connection.getAllEmployees();
-        List<Employee> list = jpaUtil.getAllEmployees();
+        List<Employee> list = connection.getAllEmployees();
+        //List<Employee> list = jpaUtil.getAllEmployees();
         session.setAttribute("listEmp", list);
         if (userName != null) {
             if (connection.getUser(userName, password).getClass() == AdminUser.class) {
