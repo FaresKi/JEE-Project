@@ -15,15 +15,24 @@ import java.util.List;
  */
 public class Employee implements Serializable {
 
-    String nom;
-    String prenom;
-    String telDomicile;
-    String telPortable;
-    String telPro;
-    String adresse;
-    String codePostal;
-    String ville;
-    String email;
+    private Integer id;
+    private String nom;
+    private String prenom;
+    private String telDomicile;
+    private String telPortable;
+    private String telPro;
+    private String adresse;
+    private String codePostal;
+    private String ville;
+    private String email;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNom() {
         return nom;
@@ -97,7 +106,8 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public Employee(String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email) {
+    public Employee(Integer id, String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.telDomicile = telDomicile;
@@ -108,5 +118,4 @@ public class Employee implements Serializable {
         this.ville = ville;
         this.email = email;
     }
-
 }

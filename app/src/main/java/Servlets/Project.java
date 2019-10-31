@@ -101,7 +101,7 @@ public class Project extends HttpServlet {
         if (request.getParameter("modify") != null && session.getAttribute("admin") != null) {
 
             System.out.println("dans modify");
-            String select = (String) request.getParameter("select");
+            Integer select = Integer.parseInt(request.getParameter("select"));
             Employee changedEmp = connection.getSpecificEmployee(select);
             request.getSession().setAttribute("changedEmp", changedEmp);
             request.getSession().setAttribute("select", select);
@@ -125,8 +125,8 @@ public class Project extends HttpServlet {
                     + "\n modifiedTelport : " + modifiedTelport
                     + "\n select : " + request.getSession().getAttribute("select")
             );
-
-            connection.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, (String) request.getSession().getAttribute("select"));
+            Integer select = (Integer) request.getSession().getAttribute("select");
+            connection.updateEmployee(select, modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail);
             list = connection.getAllEmployees();
             session.setAttribute("listEmp", list);
             response.sendRedirect("admin.jsp");
@@ -135,9 +135,8 @@ public class Project extends HttpServlet {
 
         //Suppression
         if (request.getParameter("delete") != null) {
-            String select = (String) request.getParameter("select");
+            Integer select = Integer.parseInt(request.getParameter("select"));
             connection.deleteEmployee(select);
-            connection.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, (String) request.getSession().getAttribute("select"));
             list = connection.getAllEmployees();
             session.setAttribute("listEmp", list);
             response.sendRedirect("admin.jsp");

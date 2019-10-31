@@ -39,7 +39,7 @@
                     <tr>
                         <td>
                             <div class="radio">
-                                <input type="radio" name="select" value="${emp.nom}">
+                                <input type="radio" name="select" value="${emp.id}">
                             </div>
                         </td>
                         <td>
