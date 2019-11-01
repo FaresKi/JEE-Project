@@ -13,8 +13,7 @@ import javax.persistence.Table;
  * @author fareskissoum
  */
 
-@Entity
-@Table(name="UTILISATEUR")
+
 public class AdminUser extends User {
     
     public AdminUser(String userName, String password) {

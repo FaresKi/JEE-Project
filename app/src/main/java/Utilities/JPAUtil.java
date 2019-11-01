@@ -12,7 +12,7 @@ import JavaBeans.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -46,20 +46,20 @@ public class JPAUtil {
         entityManager.getTransaction().begin();
         entityManager.persist(emp);
         entityManager.getTransaction().commit();
+    */
 
-
-        List<Employee> employees = new ArrayList<>();
-        String queryAllEmployees = "SELECT * FROM EMPLOYE";
-        employees = entityManager.createNativeQuery(queryAllEmployees, Employee.class).getResultList();
+        List<Employee> employees ;
+        String queryAllEmployees = "SELECT e FROM Employee e";
+        employees = entityManager.createQuery(queryAllEmployees, Employee.class).getResultList();
         for (Employee empTest : employees) {
             System.out.println("Nom : " + empTest.getNom());
         }
-         */
 
+        /*
         String admin = "admin";
         User user = entityManager.find(User.class,admin);
         System.out.println("username : " + user.getUserName());
-
+        */
         // Check database version
         String sql = "select version()";
         /*

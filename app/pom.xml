@@ -42,10 +42,16 @@
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
-            <scope>provided</scope>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>

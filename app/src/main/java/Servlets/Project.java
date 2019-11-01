@@ -8,15 +8,17 @@ package Servlets;
 import JavaBeans.AdminUser;
 import JavaBeans.Employee;
 import JavaBeans.User;
+
+import SessionBeans.EmployeeSB;
 import Utilities.ConnectionClass;
-import Utilities.JPAUtil;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +34,12 @@ import javax.servlet.http.HttpSession;
 
 public class Project extends HttpServlet {
 
+    @EJB
+    EmployeeSB employeeSB;
+    List<Employee> employees;
+
     HttpSession session;
     ConnectionClass connection;
-    JPAUtil jpaUtil = new JPAUtil();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,11 +57,13 @@ public class Project extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String userName = (String) request.getParameter("login");
         String password = (String) request.getParameter("password");
+        employees = new ArrayList<>();
+        employees= employeeSB.getAllEmployees();
         connection = new ConnectionClass();
         session = request.getSession();
-        List<Employee> list = connection.getAllEmployees();
-        //List<Employee> list = jpaUtil.getAllEmployees();
-        session.setAttribute("listEmp", list);
+        System.out.println("list size : ");
+        //List<Employee> employees = jpaUtil.getAllEmployees();
+        session.setAttribute("listEmp", employees);
         if (userName != null) {
             if (connection.getUser(userName, password).getClass() == AdminUser.class) {
                 AdminUser admin = new AdminUser(userName, password);
@@ -93,8 +100,8 @@ public class Project extends HttpServlet {
             if (request.getParameter("retour") != null && session.getAttribute("admin") != null) {
                 response.sendRedirect("admin.jsp");
             } else if (session.getAttribute("admin") != null) {
-                list = connection.getAllEmployees();
-                session.setAttribute("listEmp", list);
+                employees = connection.getAllEmployees();
+                session.setAttribute("listEmp", employees);
                 response.sendRedirect("admin.jsp");
             }
         }
@@ -131,8 +138,8 @@ public class Project extends HttpServlet {
             );
 
             connection.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, (String) request.getSession().getAttribute("select"));
-            list = connection.getAllEmployees();
-            session.setAttribute("listEmp", list);
+            employees = connection.getAllEmployees();
+            session.setAttribute("listEmp", employees);
             response.sendRedirect("admin.jsp");
 
         }
@@ -142,8 +149,8 @@ public class Project extends HttpServlet {
             String select = (String) request.getParameter("select");
             connection.deleteEmployee(select);
             connection.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, (String) request.getSession().getAttribute("select"));
-            list = connection.getAllEmployees();
-            session.setAttribute("listEmp", list);
+            employees = connection.getAllEmployees();
+            session.setAttribute("listEmp", employees);
             response.sendRedirect("admin.jsp");
         }
 
