@@ -19,7 +19,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="m1se_appv2_war_1.0PU" />
+          <factory-entry name="m1se_appv2_war_1.0PU" value="4b40a798-8552-440d-88ad-11f8f0a7e37b" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />

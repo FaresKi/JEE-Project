@@ -5,6 +5,8 @@
  */
 package SessionBeans;
 
+import Entities.User;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,10 @@ import javax.persistence.PersistenceContext;
 public class UserSB {
     @PersistenceContext
     EntityManager em;
+    public User getUser (String userName, String password){
+        String queryGetID = "SELECT u.id from User u where u.userName:userName ";
+        return new User();
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

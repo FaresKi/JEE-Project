@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,15 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "UTILISATEUR")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM Utilisateur u"),
-    @NamedQuery(name = "Utilisateur.findById", query = "SELECT u FROM Utilisateur u WHERE u.id = :id"),
-    @NamedQuery(name = "Utilisateur.findByUsername", query = "SELECT u FROM Utilisateur u WHERE u.username = :username"),
-    @NamedQuery(name = "Utilisateur.findByPassword", query = "SELECT u FROM Utilisateur u WHERE u.password = :password"),
-    @NamedQuery(name = "Utilisateur.findByAdmin", query = "SELECT u FROM Utilisateur u WHERE u.admin = :admin"),
-    @NamedQuery(name = "Utilisateur.findByDtype", query = "SELECT u FROM Utilisateur u WHERE u.dtype = :dtype")})
-public class Utilisateur implements Serializable {
+    @NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "Utilisateur.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+    @NamedQuery(name = "Utilisateur.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
+    @NamedQuery(name = "Utilisateur.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
+    @NamedQuery(name = "Utilisateur.findByAdmin", query = "SELECT u FROM User u WHERE u.admin = :admin"),
+    @NamedQuery(name = "Utilisateur.findByDtype", query = "SELECT u FROM User u WHERE u.dtype = :dtype")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,19 +59,16 @@ public class Utilisateur implements Serializable {
     @Column(name = "DTYPE")
     private String dtype;
 
-    public Utilisateur() {
+    public User() {
     }
 
-    public Utilisateur(Integer id) {
+    public User(Integer id) {
         this.id = id;
     }
 
-    public Utilisateur(Integer id, String username, String password, boolean admin, String dtype) {
-        this.id = id;
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.admin = admin;
-        this.dtype = dtype;
     }
 
     public Integer getId() {
@@ -126,10 +121,10 @@ public class Utilisateur implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Utilisateur)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Utilisateur other = (Utilisateur) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -140,5 +135,5 @@ public class Utilisateur implements Serializable {
     public String toString() {
         return "Entities.Utilisateur[ id=" + id + " ]";
     }
-    
+
 }

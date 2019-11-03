@@ -5,18 +5,36 @@
  */
 package Servlet;
 
+import Entities.Employee;
+import Entities.User;
+import SessionBeans.EmployeeSB;
+import SessionBeans.UserSB;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author fareskissoum
  */
+@WebServlet(urlPatterns = {"/Project"})
 public class Project extends HttpServlet {
+    @EJB
+    EmployeeSB employeeSB;
+    UserSB userSB;
+
+    List<Employee> employees;
+
+    HttpSession session;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,18 +48,21 @@ public class Project extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Project</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Project at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String userName = (String) request.getParameter("login");
+        String password = (String) request.getParameter("password");
+        User loggedUser = new User();
+        employees = new ArrayList<>();
+        employees= employeeSB.getAllEmployees();
+        session = request.getSession();
+        if(userName!=null){
+            System.out.println("not null");
+             loggedUser = userSB.getUser(userName,password);
+            if(loggedUser.getAdmin()){
+                session.setAttribute("admin",loggedUser);
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
+            }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
