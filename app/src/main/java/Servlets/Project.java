@@ -59,13 +59,13 @@ public class Project extends HttpServlet {
         String password = (String) request.getParameter("password");
         employees = new ArrayList<>();
         employees= employeeSB.getAllEmployees();
-        connection = new ConnectionClass();
+        //connection = new ConnectionClass();
         session = request.getSession();
         System.out.println("list size : ");
         //List<Employee> employees = jpaUtil.getAllEmployees();
         session.setAttribute("listEmp", employees);
         if (userName != null) {
-            if (connection.getUser(userName, password).getClass() == AdminUser.class) {
+            if ("admin".equals(userName) && "password".equals(password)) {
                 AdminUser admin = new AdminUser(userName, password);
                 session.setAttribute("admin", admin);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
