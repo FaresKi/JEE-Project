@@ -110,9 +110,8 @@ public class Project extends HttpServlet {
         //Modification
         //on choppe le Parameter et on fait l'include et on sort du if
         if (request.getParameter("modify") != null && session.getAttribute("admin") != null) {
-
+            String select = request.getParameter("select");
             System.out.println("dans modify");
-            String select = (String) request.getParameter("select");
             Employee changedEmp = connection.getSpecificEmployee(select);
             request.getSession().setAttribute("changedEmp", changedEmp);
             request.getSession().setAttribute("select", select);

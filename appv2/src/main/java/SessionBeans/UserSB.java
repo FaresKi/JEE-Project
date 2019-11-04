@@ -20,8 +20,14 @@ public class UserSB {
     @PersistenceContext
     EntityManager em;
     public User getUser (String userName, String password){
-        String queryGetID = "SELECT u.id from User u where u.userName:userName ";
-        return new User();
+        String queryGetUser = "SELECT u FROM User u WHERE u.username = :username AND u.password=:password";
+        User fetchedUser = (User) em.createQuery(queryGetUser).setParameter("username",userName).setParameter("password",password).getSingleResult();
+        if(fetchedUser!=null){
+            System.out.println("user not null");
+            return fetchedUser;
+        }
+        System.out.println("user null");
+        return null;
     }
 
     // Add business logic below. (Right-click in editor and choose

@@ -52,7 +52,7 @@
                 <input type="email" id="mail" name="modifiedEmail" value = "${changedEmp.email}" >
             </div>
 
-            <input type="submit" value="Modifier" />
+            <input type="submit" value="Modifier" name="confirm"/>
             <input type="submit" value="Retour à la liste" name="retour"/>
         </form>
     </body>

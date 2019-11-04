@@ -35,28 +35,22 @@ public class EmployeeSB {
             return employees;
         }
         System.out.println("c'est null");
-        return employees;
+        return null;
     }
 
     public void addNewEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email) {
 
         Employee emp = new Employee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email);
-        em.getTransaction().begin();
         em.persist(emp);
-        em.getTransaction().commit();
     }
     public void deleteEmployee(int id) {
         Employee employee = em.find(Employee.class, id);
-
-        em.getTransaction().begin();
         em.remove(employee);
-        em.getTransaction().commit();
     }
 
     public void updateEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email, int id) {
 
         Employee emp = em.find(Employee.class, id);
-        em.getTransaction().begin();
         emp.setNom(nom);
         emp.setPrenom(prenom);
         emp.setTelDomicile(teldom);
@@ -66,7 +60,6 @@ public class EmployeeSB {
         emp.setCodePostal(codePostal);
         emp.setVille(ville);
         emp.setEmail(email);
-        em.getTransaction().commit();
     }
 
     public  Employee getSpecificEmployee(int id) {

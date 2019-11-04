@@ -51,7 +51,7 @@
                 <input type="email" id="mail" name="addEmail">
             </div>
 
-            <input type="submit" value="Ajouter" />
+            <input type="submit" value="Ajouter" name="confirm" />
             <input type="submit" value="Retour à la liste" name="retour"/>
 
         </form>

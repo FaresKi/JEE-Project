@@ -19,7 +19,7 @@ public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
+    public int id;
     @Size(max = 255)
     @Column(name = "NOM")
     public String nom;
@@ -151,8 +151,9 @@ public class Employee implements Serializable {
     }
 
     
-
+/*
     @Override
+
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Employee)) {
@@ -164,6 +165,8 @@ public class Employee implements Serializable {
         }
         return true;
     }
+
+     */
 
     @Override
     public String toString() {
