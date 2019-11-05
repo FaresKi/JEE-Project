@@ -76,7 +76,6 @@ public class Project extends HttpServlet {
                 session.setAttribute("user", user);
                 request.getRequestDispatcher("home.jsp").forward(request, response);
             }
-
         }
 
         //Ajout

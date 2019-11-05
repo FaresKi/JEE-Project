@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
- *
  * @author fareskissoum
  */
 @Stateless
@@ -22,14 +21,14 @@ public class EmployeeSB {
     @PersistenceContext
     EntityManager em;
 
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
 
         String query = "SELECT e FROM Employee e ";
-        Query q  = em.createQuery(query);
+        Query q = em.createQuery(query);
         List<Employee> employees = q.getResultList();
-        if(employees!=null){
+        if (employees != null) {
             System.out.println("c'est pas null list size : " + q.getResultList().size());
-            for(Employee emp:employees){
+            for (Employee emp : employees) {
                 System.out.println("id  : " + emp.getId());
             }
             return employees;
@@ -43,6 +42,7 @@ public class EmployeeSB {
         Employee emp = new Employee(nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email);
         em.persist(emp);
     }
+
     public void deleteEmployee(int id) {
         Employee employee = em.find(Employee.class, id);
         em.remove(employee);
@@ -62,11 +62,8 @@ public class EmployeeSB {
         emp.setEmail(email);
     }
 
-    public  Employee getSpecificEmployee(int id) {
+    public Employee getSpecificEmployee(int id) {
         return em.find(Employee.class, id);
     }
 
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

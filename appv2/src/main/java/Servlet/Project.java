@@ -35,6 +35,8 @@ public class Project extends HttpServlet {
 
     HttpSession session;
 
+    boolean selected = true;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,10 +51,11 @@ public class Project extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String userName = request.getParameter("login");
         String password = request.getParameter("password");
-        User loggedUser = new User();
+        User loggedUser;
         employees = new ArrayList<>();
         employees = employeeSB.getAllEmployees();
         session = request.getSession();
+        session.setAttribute("selected", selected);
         if (userName != null) {
             System.out.println("not null");
             loggedUser = userSB.getUser(userName, password);
@@ -94,12 +97,21 @@ public class Project extends HttpServlet {
             }
 
             if (request.getParameter("modify") != null) {
-                request.getRequestDispatcher("modify.jsp").include(request, response);
-                int id = Integer.parseInt(request.getParameter("select"));
-                Employee changedEmp = employeeSB.getSpecificEmployee(id);
-                request.getSession().setAttribute("changedEmp", changedEmp);
-                request.getSession().setAttribute("select", id);
-                request.getRequestDispatcher("modify.jsp").forward(request, response);
+                if (request.getParameter("select") != null) {
+                    request.getRequestDispatcher("modify.jsp").include(request, response);
+                    selected = true;
+                    session.setAttribute("selected", selected);
+                    int id = Integer.parseInt(request.getParameter("select"));
+                    Employee changedEmp = employeeSB.getSpecificEmployee(id);
+                    request.getSession().setAttribute("changedEmp", changedEmp);
+                    request.getSession().setAttribute("select", id);
+                    request.getRequestDispatcher("modify.jsp").forward(request, response);
+                } else {
+                    selected = false;
+                    session.setAttribute("selected", selected);
+                    request.getRequestDispatcher("admin.jsp").include(request, response);
+                }
+
             }
             String modifiedNom = request.getParameter("modifiedNom");
             String modifiedPrenom = request.getParameter("modifiedPrenom");
@@ -126,23 +138,30 @@ public class Project extends HttpServlet {
             }
 
             if (request.getParameter("delete") != null) {
-                int id = Integer.parseInt(request.getParameter("select"));
-                employeeSB.deleteEmployee(id);
-                employees = employeeSB.getAllEmployees();
-                session.setAttribute("listEmp", employees);
-                response.sendRedirect("admin.jsp");
+                if (request.getParameter("select") != null) {
+                    selected = true;
+                    session.setAttribute("selected", selected);
+                    int id = Integer.parseInt(request.getParameter("select"));
+                    employeeSB.deleteEmployee(id);
+                    employees = employeeSB.getAllEmployees();
+                    session.setAttribute("listEmp", employees);
+                    response.sendRedirect("admin.jsp");
+                } else {
+                    selected = false;
+                    session.setAttribute("selected", selected);
+                    response.sendRedirect("admin.jsp");
+                }
             }
 
             if (request.getParameter("logout") != null) {
                 session.removeAttribute("admin");
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("logout.html");
             }
 
-        }
-       else if (request.getSession().getAttribute("user") != null) {
+        } else if (request.getSession().getAttribute("user") != null) {
             if (request.getParameter("logout") != null) {
-                session.removeAttribute("admin");
-                response.sendRedirect("login.jsp");
+                session.removeAttribute("user");
+                response.sendRedirect("logout.html");
             }
         }
     }
