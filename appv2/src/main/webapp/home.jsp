@@ -67,6 +67,9 @@
         </table>
     </body>
     <form method="post" action="Project">
-        <input type="submit" value="Déconnecter" name="logout"/>
+        <div style="position: absolute; top: 10px; right: 100px;">
+            Bonjour <c:out value="${user.username}" />
+        </div>
+        <input type="submit" value="Déconnecter" name="logout" style="position: absolute; top: 10px; right: 10px" />
     </form>
 </html>
