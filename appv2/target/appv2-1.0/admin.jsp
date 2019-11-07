@@ -110,7 +110,10 @@
             <input type="submit" value="Ajouter" name="add" />
             <input type="submit" value="Supprimer" name="delete"/>
             <input type="submit" value="Modifier" name="modify"/>
-            <input type="submit" value="Déconnecter" name="logout"/>
+            <div style="position: absolute; top: 10px; right: 100px;">
+                Bonjour <c:out value="${admin.username}" />
+            </div>
+            <input type="submit" value="Déconnecter" name="logout" style="position: absolute; top: 10px; right: 10px" />
         </form>
     </body>
 </html>
