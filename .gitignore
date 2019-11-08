@@ -1,3 +1,4 @@
 /app/target/
 
 .DS_STORE
+/appv3/appv3/target/

@@ -1122,104 +1122,92 @@
     </collation>
     <table id="282" parent="2" name="EMPLOYE"/>
     <table id="283" parent="2" name="UTILISATEUR"/>
-    <table id="284" parent="2" name="hibernate_sequence"/>
-    <column id="285" parent="282" name="ID">
+    <column id="284" parent="282" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="282" name="NOM">
+    <column id="285" parent="282" name="NOM">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="282" name="PRENOM">
+    <column id="286" parent="282" name="PRENOM">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="282" name="TELDOMICILE">
+    <column id="287" parent="282" name="TELDOMICILE">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="282" name="TELPORTABLE">
+    <column id="288" parent="282" name="TELPORTABLE">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="282" name="TELPRO">
+    <column id="289" parent="282" name="TELPRO">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="282" name="ADRESSE">
+    <column id="290" parent="282" name="ADRESSE">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="282" name="CODEPOSTAL">
+    <column id="291" parent="282" name="CODEPOSTAL">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="282" name="VILLE">
+    <column id="292" parent="282" name="VILLE">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="294" parent="282" name="EMAIL">
+    <column id="293" parent="282" name="EMAIL">
       <Position>10</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="295" parent="282" name="PRIMARY">
+    <key id="294" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="296" parent="283" name="ID">
+    <column id="295" parent="283" name="ID">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="283" name="USERNAME">
+    <column id="296" parent="283" name="USERNAME">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="283" name="PASSWORD">
+    <column id="297" parent="283" name="PASSWORD">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="283" name="ADMIN">
+    <column id="298" parent="283" name="ADMIN">
       <Position>4</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="283" name="DTYPE">
-      <Position>5</Position>
-      <DataType>varchar(31)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="301" parent="283" name="PRIMARY">
+    <key id="299" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="302" parent="284" name="next_val">
-      <Position>1</Position>
-      <DataType>bigint(20)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
   </database-model>
 </dataSource>
