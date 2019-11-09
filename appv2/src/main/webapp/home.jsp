@@ -10,7 +10,33 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-    <head>
+<style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336; /* Red */
+        color: white;
+        margin-bottom: 15px;
+    }
+
+    /* The close button */
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    /* When moving the mouse over the close button */
+    .closebtn:hover {
+        color: black;
+    }
+</style>
+
+<head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consultation des employés</title>
         <style>
@@ -18,8 +44,12 @@
                 border: 1px solid black;
             }
         </style>
+    <c:if test="${empty listEmp}">
+        <h1 style="color: blue">Nous devons recruter !</h1>
+    </c:if>
     </head>
     <body>
+    <c:if test="${!empty listEmp}">
         <h1>Liste des employés</h1>
         <table>
             <tr>
@@ -65,6 +95,7 @@
                 </tr>
             </c:forEach>
         </table>
+    </c:if>
     </body>
     <form method="post" action="Project">
         <div style="position: absolute; top: 10px; right: 100px;">

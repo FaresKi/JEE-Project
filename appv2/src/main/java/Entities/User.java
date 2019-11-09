@@ -5,18 +5,10 @@
  */
 package Entities;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  *
@@ -30,7 +22,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Utilisateur.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "Utilisateur.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "Utilisateur.findByAdmin", query = "SELECT u FROM User u WHERE u.admin = :admin"),
-    @NamedQuery(name = "Utilisateur.findByDtype", query = "SELECT u FROM User u WHERE u.dtype = :dtype")})
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,11 +45,6 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "ADMIN")
     private boolean admin;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 31)
-    @Column(name = "DTYPE")
-    private String dtype;
 
     public User() {
     }
@@ -103,13 +90,6 @@ public class User implements Serializable {
         this.admin = admin;
     }
 
-    public String getDtype() {
-        return dtype;
-    }
-
-    public void setDtype(String dtype) {
-        this.dtype = dtype;
-    }
 
     @Override
     public int hashCode() {
@@ -125,10 +105,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override

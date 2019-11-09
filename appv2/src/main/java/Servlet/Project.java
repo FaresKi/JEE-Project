@@ -7,8 +7,7 @@ package Servlet;
 
 import Entities.Employee;
 import Entities.User;
-import SessionBeans.EmployeeSB;
-import SessionBeans.UserSB;
+import SessionBeans.EntitiesSB;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -26,10 +25,9 @@ import java.util.List;
  */
 @WebServlet(urlPatterns = {"/Project"})
 public class Project extends HttpServlet {
+
     @EJB
-    EmployeeSB employeeSB;
-    @EJB
-    UserSB userSB;
+    EntitiesSB entitiesSB;
 
     List<Employee> employees;
 
@@ -53,12 +51,12 @@ public class Project extends HttpServlet {
         String password = request.getParameter("password");
         User loggedUser;
         employees = new ArrayList<>();
-        employees = employeeSB.getAllEmployees();
+        employees = entitiesSB.getAllEmployees();
         session = request.getSession();
         session.setAttribute("selected", selected);
         if (userName != null) {
             System.out.println("not null");
-            loggedUser = userSB.getUser(userName, password);
+            loggedUser = entitiesSB.getUser(userName, password);
             if (loggedUser.getAdmin()) {
                 session.setAttribute("admin", loggedUser);
                 session.setAttribute("listEmp", employees);
@@ -85,8 +83,8 @@ public class Project extends HttpServlet {
             String addEmail = request.getParameter("addEmail");
             if (addNom != null) {
                 if (request.getParameter("confirm") != null) {
-                    employeeSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
-                    employees = employeeSB.getAllEmployees();
+                    entitiesSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
+                    employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
                     response.sendRedirect("admin.jsp");
                 }
@@ -102,7 +100,7 @@ public class Project extends HttpServlet {
                     selected = true;
                     session.setAttribute("selected", selected);
                     int id = Integer.parseInt(request.getParameter("select"));
-                    Employee changedEmp = employeeSB.getSpecificEmployee(id);
+                    Employee changedEmp = entitiesSB.getSpecificEmployee(id);
                     request.getSession().setAttribute("changedEmp", changedEmp);
                     request.getSession().setAttribute("select", id);
                     request.getRequestDispatcher("modify.jsp").forward(request, response);
@@ -126,8 +124,8 @@ public class Project extends HttpServlet {
             if (modifiedNom != null) {
                 if (request.getParameter("confirm") != null) {
                     int id = (int) request.getSession().getAttribute("select");
-                    employeeSB.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, id);
-                    employees = employeeSB.getAllEmployees();
+                    entitiesSB.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, id);
+                    employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
                     response.sendRedirect("admin.jsp");
                 }
@@ -142,8 +140,8 @@ public class Project extends HttpServlet {
                     selected = true;
                     session.setAttribute("selected", selected);
                     int id = Integer.parseInt(request.getParameter("select"));
-                    employeeSB.deleteEmployee(id);
-                    employees = employeeSB.getAllEmployees();
+                    entitiesSB.deleteEmployee(id);
+                    employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
                     response.sendRedirect("admin.jsp");
                 } else {

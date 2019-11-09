@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SessionBeans;
 
 import Entities.Employee;
+import Entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,11 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-/**
- * @author fareskissoum
- */
 @Stateless
-public class EmployeeSB {
+
+public class EntitiesSB {
     @PersistenceContext
     EntityManager em;
 
@@ -66,4 +60,15 @@ public class EmployeeSB {
         return em.find(Employee.class, id);
     }
 
+
+    public User getUser(String userName, String password) {
+        String queryGetUser = "SELECT u FROM User u WHERE u.username = :username AND u.password=:password";
+        User fetchedUser = (User) em.createQuery(queryGetUser).setParameter("username", userName).setParameter("password", password).getSingleResult();
+        if (fetchedUser != null) {
+            System.out.println("user not null");
+            return fetchedUser;
+        }
+        System.out.println("user null");
+        return null;
+    }
 }
