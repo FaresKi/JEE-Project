@@ -51,72 +51,6 @@
         Veuillez sélectionner quelqu'un à modifier ou supprimer.
     </div>
 </c:if>
-<<<<<<< Updated upstream
-<form method="POST" action="Project">
-
-    <c:if test="${!empty listEmp}">
-        <h1>Liste des employés</h1>
-        <table>
-            <tr>
-                <th>Sel</th>
-                <th>NOM</th>
-                <th>PRENOM</th>
-                <th>TEL DOMICILE</th>
-                <th>TEL PORTABLE</th>
-                <th>TEL PROFESSIONNEL</th>
-                <th>ADRESSE</th>
-                <th>CODE POSTAL</th>
-                <th>VILLE</th>
-                <th>EMAIL</th>
-            </tr>
-            <c:forEach items="${listEmp}" var="emp">
-
-                <tr>
-                    <td>
-                        <div class="radio">
-                            <input type="radio" name="select" value="${emp.id}">
-                        </div>
-                    </td>
-                    <td>
-                        <c:out value="${emp.nom}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.prenom}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.telDomicile}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.telPortable}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.telPro}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.adresse}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.codePostal}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.ville}"/>
-                    </td>
-                    <td>
-                        <c:out value="${emp.email}"/>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:if>
-    <input type="submit" value="Ajouter" name="add"/>
-    <input type="submit" value="Supprimer" name="delete"/>
-    <input type="submit" value="Modifier" name="modify"/>
-    <div style="position: absolute; top: 10px; right: 100px;">
-        Bonjour <c:out value="${admin.username}"/>
-    </div>
-    <input type="submit" value="Déconnecter" name="logout" style="position: absolute; top: 10px; right: 10px"/>
-</form>
-=======
 <nav class="navbar has-shadow is-white" role="navigation" aria-label="main navigation">
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
@@ -130,8 +64,8 @@
         </div>
         <div class="navbar-end">
             <div class="navbar-item">
-                <form  method="POST" action="Project">
-                    <input class="button is-info" type="submit" value="Déconnecter" name="logout" />
+                <form method="POST" action="Project">
+                    <input class="button is-info" type="submit" value="Déconnecter" name="logout"/>
                 </form>
             </div>
         </div>
@@ -140,60 +74,60 @@
 
 <section class="section has-shadow ">
     <div class="container ">
-        <form  method="POST" action="Project">
+        <form method="POST" action="Project">
             <c:if test="${!empty listEmp}">
                 <h1 class="label">Liste des employés</h1>
-            <table class="table has-shadow">
-                <tr>
-                    <th>Sel</th>
-                    <th>NOM</th>
-                    <th>PRENOM</th>
-                    <th>TEL DOMICILE</th>
-                    <th>TEL PORTABLE</th>
-                    <th>TEL PROFESSIONNEL</th>
-                    <th>ADRESSE</th>
-                    <th>CODE POSTAL</th>
-                    <th>VILLE</th>
-                    <th>EMAIL</th>
-                </tr>
-                <c:forEach items="${listEmp}" var="emp">
-
+                <table class="table has-shadow">
                     <tr>
-                        <td>
-                            <div class="radio">
-                                <input type="radio" name="select" value="${emp.id}">
-                            </div>
-                        </td>
-                        <td>
-                            <c:out value="${emp.nom}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.prenom}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.telDomicile}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.telPortable}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.telPro}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.adresse}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.codePostal}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.ville}"/>
-                        </td>
-                        <td>
-                            <c:out value="${emp.email}"/>
-                        </td>
+                        <th>Sel</th>
+                        <th>NOM</th>
+                        <th>PRENOM</th>
+                        <th>TEL DOMICILE</th>
+                        <th>TEL PORTABLE</th>
+                        <th>TEL PROFESSIONNEL</th>
+                        <th>ADRESSE</th>
+                        <th>CODE POSTAL</th>
+                        <th>VILLE</th>
+                        <th>EMAIL</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${listEmp}" var="emp">
+
+                        <tr>
+                            <td>
+                                <div class="radio">
+                                    <input type="radio" name="select" value="${emp.id}">
+                                </div>
+                            </td>
+                            <td>
+                                <c:out value="${emp.nom}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.prenom}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.telDomicile}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.telPortable}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.telPro}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.adresse}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.codePostal}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.ville}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emp.email}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </c:if>
             <div class="buttons">
                 <input class="button is-info" type="submit" value="Ajouter" name="add"/>
@@ -204,7 +138,5 @@
         </form>
     </div>
 </section>
-
->>>>>>> Stashed changes
 </body>
 </html>
