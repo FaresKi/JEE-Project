@@ -59,7 +59,7 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Employee find(@PathParam("id") Integer id) {
-        return super.find(id);
+        return em.find(Employee.class,id);
     }
 
     @GET

@@ -5,6 +5,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
+          <factory-entry name="Entities" />
           <factory-entry name="m1se_appv2_war_1.0PU" />
         </datasource-mapping>
         <naming-strategy-map />
