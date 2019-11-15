@@ -46,7 +46,17 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Employee emp) {
-        super.edit(emp);
+        Employee modifiedEmployee = em.find(Employee.class,id);
+        modifiedEmployee.setNom(emp.getNom());
+        modifiedEmployee.setPrenom(emp.getPrenom());
+        modifiedEmployee.setTelDomicile(emp.getTelDomicile());
+        modifiedEmployee.setTelPortable(emp.getTelPortable());
+        modifiedEmployee.setTelPro(emp.getTelPro());
+        modifiedEmployee.setAdresse(emp.getAdresse());
+        modifiedEmployee.setCodePostal(emp.getCodePostal());
+        modifiedEmployee.setVille(emp.getVille());
+        modifiedEmployee.setEmail(emp.getEmail());
+        em.merge(modifiedEmployee);
     }
 
     @DELETE
