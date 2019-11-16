@@ -19,15 +19,7 @@ public class EntitiesSB {
         String query = "SELECT e FROM Employee e ";
         Query q = em.createQuery(query);
         List<Employee> employees = q.getResultList();
-        if (employees != null) {
-            System.out.println("c'est pas null list size : " + q.getResultList().size());
-            for (Employee emp : employees) {
-                System.out.println("id  : " + emp.getId());
-            }
-            return employees;
-        }
-        System.out.println("c'est null");
-        return null;
+        return employees;
     }
 
     public void addNewEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email) {
@@ -60,15 +52,15 @@ public class EntitiesSB {
     }
 
 
-    public User getUser (String userName, String password){
+    public User getUser(String userName, String password) {
         String queryGetUser = "SELECT u FROM User u WHERE u.username = :username AND u.password=:password";
-        User fetchedUser = (User) em.createQuery(queryGetUser).setParameter("username",userName).setParameter("password",password).getSingleResult();
-        if(fetchedUser!=null){
-            System.out.println("user not null");
+        try {
+            User fetchedUser = (User) em.createQuery(queryGetUser).setParameter("username", userName).setParameter("password", password).getSingleResult();
             return fetchedUser;
+        } catch (javax.persistence.NoResultException e) {
+            return null;
         }
-        System.out.println("user null");
-        return null;
+
     }
 
 }

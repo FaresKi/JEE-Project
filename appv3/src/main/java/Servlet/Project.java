@@ -55,16 +55,29 @@ public class Project extends HttpServlet {
         session = request.getSession();
         session.setAttribute("selected", selected);
         if (userName != null) {
-            System.out.println("not null");
-            loggedUser = entitiesSB.getUser(userName, password);
-            if (loggedUser.getAdmin()) {
-                session.setAttribute("admin", loggedUser);
-                session.setAttribute("listEmp", employees);
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
-            } else {
-                session.setAttribute("user", loggedUser);
-                session.setAttribute("listEmp", employees);
-                request.getRequestDispatcher("home.jsp").forward(request, response);
+            if (userName.isEmpty() || password.isEmpty()) {
+                session.setAttribute("emptyFields", true);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+            if (!userName.isEmpty() && !password.isEmpty()) {
+                loggedUser = entitiesSB.getUser(userName, password);
+                if (loggedUser == null) {
+                    boolean foundUser = false;
+                    session.setAttribute("foundUser", foundUser);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                } else {
+                    if (loggedUser.getAdmin()) {
+                        boolean foundUser = true;
+                        session.setAttribute("foundUser", foundUser);
+                        session.setAttribute("admin", loggedUser);
+                        session.setAttribute("listEmp", employees);
+                        request.getRequestDispatcher("admin.jsp").forward(request, response);
+                    } else {
+                        session.setAttribute("user", loggedUser);
+                        session.setAttribute("listEmp", employees);
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                    }
+                }
             }
         }
 
@@ -154,6 +167,10 @@ public class Project extends HttpServlet {
             if (request.getParameter("logout") != null) {
                 session.removeAttribute("admin");
                 response.sendRedirect("logout.html");
+            }
+
+            if (request.getParameter("restapi") != null) {
+                response.sendRedirect(request.getContextPath() + "/webapi");
             }
 
         } else if (request.getSession().getAttribute("user") != null) {

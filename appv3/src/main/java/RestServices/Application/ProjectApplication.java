@@ -8,7 +8,7 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("/Project")
+@ApplicationPath("/webapi")
 public class ProjectApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {

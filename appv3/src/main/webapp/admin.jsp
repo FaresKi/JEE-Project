@@ -117,7 +117,7 @@
         Bonjour <c:out value="${admin.username}"/>
     </div>
     <input type="submit" value="Déconnecter" name="logout" style="position: absolute; top: 10px; right: 10px"/>
+    <input type="submit" value="REST API Client" name="restapi"/>
 </form>
-
 </body>
 </html>

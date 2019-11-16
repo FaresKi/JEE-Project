@@ -47,16 +47,35 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
     @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Employee emp) {
         Employee modifiedEmployee = em.find(Employee.class,id);
-        modifiedEmployee.setNom(emp.getNom());
-        modifiedEmployee.setPrenom(emp.getPrenom());
-        modifiedEmployee.setTelDomicile(emp.getTelDomicile());
-        modifiedEmployee.setTelPortable(emp.getTelPortable());
-        modifiedEmployee.setTelPro(emp.getTelPro());
-        modifiedEmployee.setAdresse(emp.getAdresse());
-        modifiedEmployee.setCodePostal(emp.getCodePostal());
-        modifiedEmployee.setVille(emp.getVille());
-        modifiedEmployee.setEmail(emp.getEmail());
+        if(emp.getNom()!=null){
+            modifiedEmployee.setNom(emp.getNom());
+        }
+        if(emp.getPrenom()!=null){
+            modifiedEmployee.setPrenom(emp.getPrenom());
+        }
+        if(emp.getTelDomicile()!=null){
+            modifiedEmployee.setTelDomicile(emp.getTelDomicile());
+        }
+        if(emp.getTelPortable()!=null){
+            modifiedEmployee.setTelPortable(emp.getTelPortable());
+        }
+        if(emp.getTelPro()!=null){
+            modifiedEmployee.setTelPro(emp.getTelPro());
+        }
+        if(emp.getAdresse()!=null){
+            modifiedEmployee.setAdresse(emp.getAdresse());
+        }
+        if(emp.getCodePostal()!=null){
+            modifiedEmployee.setCodePostal(emp.getCodePostal());
+        }
+        if(emp.getVille()!=null){
+            modifiedEmployee.setVille(emp.getVille());
+        }
+        if(emp.getEmail()!=null){
+            modifiedEmployee.setEmail(emp.getEmail());
+        }
         em.merge(modifiedEmployee);
+
     }
 
     @DELETE

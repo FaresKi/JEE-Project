@@ -1,5 +1,9 @@
-/Users/fareskissoum/Documents/JEE-Project/appv2/src/main/java/SessionBeans/EmployeeSB.java
-/Users/fareskissoum/Documents/JEE-Project/appv2/src/main/java/Entities/Employee.java
-/Users/fareskissoum/Documents/JEE-Project/appv2/src/main/java/SessionBeans/UserSB.java
-/Users/fareskissoum/Documents/JEE-Project/appv2/src/main/java/Entities/User.java
-/Users/fareskissoum/Documents/JEE-Project/appv2/src/main/java/Servlet/Project.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/Entities/Employee.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/RestServices/service/EmployeeFacadeREST.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/Entities/User.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/RestServices/service/AbstractFacade.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/Servlet/Project.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/Servlet/RESTClient.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/RestServices/Application/ProjectApplication.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/RestServices/service/UserFacadeREST.java
+/Users/fareskissoum/Documents/JEE-Project/appv3/src/main/java/SessionBeans/EntitiesSB.java
