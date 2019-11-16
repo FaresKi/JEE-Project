@@ -2,6 +2,7 @@ package Servlet;
 
 
 import Entities.Employee;
+import RestServices.service.EmployeeFacadeREST;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -12,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
@@ -30,7 +29,7 @@ public class RESTClient extends HttpServlet {
 
         HttpSession session = request.getSession();
         request.getRequestDispatcher("/restclient.jsp").include(request, response);
-        if (request.getParameter("sendRequest") != null) {
+        if (request.getParameter("sendRequest") == "Send") {
             String id = request.getParameter("id");
             String selectedProtocol = request.getParameter("protocolChoice");
             switch (selectedProtocol) {
@@ -51,13 +50,23 @@ public class RESTClient extends HttpServlet {
                     ObjectMapper mapper = new ObjectMapper();
                     String inputJSON = request.getParameter("inputTextBoxArea");
                     Employee emp = mapper.readValue(inputJSON, Employee.class);
-                    session.setAttribute("response", webTarget.request().accept(MediaType.TEXT_PLAIN).post(Entity.json(emp), String.class));
+                    new EmployeeFacadeREST().create(emp);
                     break;
 
                 case "DELETE":
-                    if(!id.isEmpty()){
+                    if (!id.isEmpty()) {
                         clientResponse = webTarget.path(id).request().delete(String.class);
                         session.setAttribute("response", clientResponse);
+                        break;
+                    }
+                    break;
+
+                case "PUT":
+                    if(!id.isEmpty()){
+                        mapper = new ObjectMapper();
+                        inputJSON = request.getParameter("inputTextBoxArea");
+                        emp = mapper.readValue(inputJSON, Employee.class);
+                        new EmployeeFacadeREST().edit(Integer.parseInt(id),emp);
                     }
 
             }
