@@ -4,14 +4,15 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-11-17T16:58:43")
+
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-11-16T21:52:41")
 @StaticMetamodel(Employee.class)
 public class Employee_ { 
 
     public static volatile SingularAttribute<Employee, String> telPro;
     public static volatile SingularAttribute<Employee, String> telDomicile;
     public static volatile SingularAttribute<Employee, String> ville;
-    public static volatile SingularAttribute<Employee, String> telPortable;
+    public static volatile SisngularAttribute<Employee, String> telPortable;
     public static volatile SingularAttribute<Employee, String> adresse;
     public static volatile SingularAttribute<Employee, Integer> id;
     public static volatile SingularAttribute<Employee, String> codePostal;

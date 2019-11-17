@@ -11,7 +11,8 @@
 <style>
     .alert {
         padding: 20px;
-        background-color: #f44336; /* Red */
+        background-color: #f44336;
+        /* Red */
         color: white;
         margin-bottom: 15px;
     }
@@ -33,35 +34,56 @@
         color: black;
     }
 </style>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
-    </head>
-    <body>
-    <h1>Login</h1>
-    <c:if test="${!foundUser}" >
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            Mot de passe ou utilisateur incorrects.
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="dashboard.css">
+</head>
+
+<body>
+    <section class="hero is-light-blue is-fullheight">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-white has-shadow is-5-tablet is-4-desktop is-3-widescreen">
+                        <c:if test="${!foundUser}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                Mot de passe ou utilisateur incorrects.
+                            </div>
+                        </c:if>
+                        <form method="post" action="Project">
+                            <div class="field">
+                                <label class="label">Login</label>
+                                <div class="control has-icons-left">
+                                    <input placeholder="Donald Trump" name="login" class="input" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control has-icons-left">
+                                    <input type="password" placeholder="*******" name="password" class="input" required>
+                                    <span class="icon is-small is-left">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field is-centered">
+                                <button class="button is-info" type="submit" name="action" value="Submit">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </c:if>
-    <c:if test="${emptyFields}" >
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            Veuillez renseigner les deux champs.
-        </div>
-    </c:if>
-        <form method="post" action="Project">
-            <table style="with: 50%">
-                <tr>
-                    <td>Login</td>
-                    <td><input type="text" name="login" /></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name="password" /></td>
-                </tr>
-            </table>
-            <input type="submit" name="action" value="Submit"/></form>
-    </body>
+    </section>
+</body>
+
 </html>

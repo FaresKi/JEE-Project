@@ -1,7 +1,5 @@
-Entities/Employee_.class
-Entities/User_.class
-SessionBeans/EmployeeSB.class
-Entities/User.class
-Servlet/Project.class
-Entities/Employee.class
-SessionBeans/UserSB.class
+Entities\Employee_.class
+Entities\Employee.class
+Entities\User.class
+Servlet\Project.class
+Entities\User_.class
