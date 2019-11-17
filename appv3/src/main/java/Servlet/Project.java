@@ -170,7 +170,7 @@ public class Project extends HttpServlet {
             }
 
             if (request.getParameter("restapi") != null) {
-                response.sendRedirect(request.getContextPath() + "/webapi");
+                response.sendRedirect(request.getContextPath()+"/webapi");
             }
 
         } else if (request.getSession().getAttribute("user") != null) {

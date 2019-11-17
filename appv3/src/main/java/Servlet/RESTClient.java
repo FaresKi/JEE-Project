@@ -1,9 +1,10 @@
 package Servlet;
 
 
-import Entities.Employee;
-import RestServices.service.EmployeeFacadeREST;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,74 +12,108 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
+
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/webapi"})
 public class RESTClient extends HttpServlet {
 
-    Client client = ClientBuilder.newClient();
-    WebTarget webTarget = client.target("http://localhost:8080/appv3/webapi/employee");
-    Response requestResponse;
+    HttpSession session;
+    String url = "http://localhost:8080/appv3/webapi/employee";
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
         request.getRequestDispatcher("/restclient.jsp").include(request, response);
-        if (request.getParameter("sendRequest") == "Send") {
-            String id = request.getParameter("id");
-            String selectedProtocol = request.getParameter("protocolChoice");
-            switch (selectedProtocol) {
-                case "GET":
-                    if (id.isEmpty()) {
-                        requestResponse = webTarget.request().get();
-                        if (requestResponse.getStatus() != 500) {
-                            session.setAttribute("response", webTarget.request().get(String.class));
-                            break;
-                        }
-                        break;
-                    }
-                    String clientResponse = webTarget.path(id).request().get(String.class);
-                    session.setAttribute("response", clientResponse);
-                    break;
-
-                case "POST":
-                    ObjectMapper mapper = new ObjectMapper();
-                    String inputJSON = request.getParameter("inputTextBoxArea");
-                    Employee emp = mapper.readValue(inputJSON, Employee.class);
-                    new EmployeeFacadeREST().create(emp);
-                    break;
-
-                case "DELETE":
-                    if (!id.isEmpty()) {
-                        clientResponse = webTarget.path(id).request().delete(String.class);
-                        session.setAttribute("response", clientResponse);
-                        break;
+        session = request.getSession();
+        if (request.getParameterMap().containsKey("action")) {
+            Client client = Client.create();
+            WebResource webResource = client.resource(url);
+            String output = "";
+            ClientResponse responseCall = null;
+            switch (request.getParameter("selectAPICall")) {
+                case "Afficher tout les employes":
+                    responseCall = webResource.accept("application/json").get(ClientResponse.class);
+                    // Status 200 is successful.
+                    if (responseCall.getStatus() != 200) {
+                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
+                        session.setAttribute("response", output);
+                    } else {
+                        output = responseCall.getEntity(String.class);
+                        session.setAttribute("response", output);
                     }
                     break;
+                case "Ajouter un employe":
+                    String input = request.getParameter("inputTextArea");
+                    responseCall = webResource.type("application/json").post(ClientResponse.class, input);
+                    // Status 200 is successful.
+                    if (responseCall.getStatus() != 204 && responseCall.getStatus() != 200) {
+                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
+                        output += responseCall.getEntity(String.class);
+                        session.setAttribute("response", output);
 
-                case "PUT":
-                    if(!id.isEmpty()){
-                        mapper = new ObjectMapper();
-                        inputJSON = request.getParameter("inputTextBoxArea");
-                        emp = mapper.readValue(inputJSON, Employee.class);
-                        new EmployeeFacadeREST().edit(Integer.parseInt(id),emp);
+                    } else {
+                        output = "Succès création, pas de ressources retournées";
+                        session.setAttribute("response", output);
+
                     }
+                    break;
+
+
+                case "Afficher un employe":
+                    responseCall = webResource.path(request.getParameter("employeIDEntered")).accept("application/json").get(ClientResponse.class);
+                    // Status 200 is successful.
+                    if (responseCall.getStatus() != 200) {
+                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
+                        session.setAttribute("response", output);
+
+                    } else {
+                        output = responseCall.getEntity(String.class);
+                        session.setAttribute("response", output);
+
+                    }
+                    break;
+
+
+                case "Supprimer un employe":
+                    responseCall = webResource.path(request.getParameter("employeIDEntered")).accept("application/json").delete(ClientResponse.class);
+                    // Status 200 is successful.
+                    if (responseCall.getStatus() != 200 && responseCall.getStatus() != 204) {
+                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
+                        session.setAttribute("response", output);
+
+                    } else {
+                        output = "Succès suppression, pas de ressources retournées";
+                        session.setAttribute("response", output);
+
+                    }
+                    break;
+
+                case "Modifier un employe":
+                    String inputArea = request.getParameter("inputTextArea");
+                    responseCall = webResource.path(request.getParameter("employeIDEntered")).type("application/json").put(ClientResponse.class, inputArea);
+                    // Status 200 is successful.
+                    if (responseCall.getStatus() != 204 && responseCall.getStatus() != 200) {
+                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
+                        output += responseCall.getEntity(String.class);
+                        session.setAttribute("response", output);
+
+                    } else {
+                        output = "Succès modification, pas de ressources retournées";
+                        session.setAttribute("response", output);
+
+                    }
+                    break;
+
 
             }
 
 
         }
-        /*
-
-         */
-
-
     }
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

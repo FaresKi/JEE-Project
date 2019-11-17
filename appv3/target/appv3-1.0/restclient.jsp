@@ -33,14 +33,15 @@
 <h2>REST API Client</h2>
 
 <form method="POST">
-    <select name="protocolChoice">
-        <option value="GET">GET</option>
-        <option value="PUT">PUT</option>
-        <option value="POST">POST</option>
-        <option value="DELETE">DELETE</option>
+    <select name="selectAPICall">
+        <option value="Afficher tout les employes">Afficher tout les employes</option>
+        <option value="Ajouter un employe">Ajouter un employe</option>
+        <option value="Afficher un employe">Afficher un employe</option>
+        <option value="Supprimer un employe">Supprimer un employe</option>
+        <option value="Modifier un employe">Modifier un employe</option>
     </select>
 
-    <input type="submit" value="Send" name="sendRequest"/>
+    <input type="submit" value="Send" name="action"/>
     <input type="text" name="id">
 
     <textarea name="inputTextBoxArea" id="myTextArea" cols="10" rows="10" style="resize: none">

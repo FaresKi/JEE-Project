@@ -7,12 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76edfb67-c560-4f2f-8834-91699fe32b73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Servlets/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Servlets/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appv2/src/main/java/Servlet/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appv2/src/main/java/Servlet/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appv2/target/appv2-1.0/WEB-INF/classes/Servlet/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv2/target/appv2-1.0/WEB-INF/classes/Servlet/Project.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appv2/target/classes/.netbeans_automatic_build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appv2/target/classes/Servlet/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv2/target/classes/Servlet/Project.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appv2/target/test-classes/.netbeans_automatic_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/login.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nb-configuration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nb-configuration.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appv3/target/classes/Entities/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv3/target/classes/Entities/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appv3/target/classes/Entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv3/target/classes/Entities/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appv3/target/classes/RestServices/service/EmployeeFacadeREST.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv3/target/classes/RestServices/service/EmployeeFacadeREST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appv3/target/classes/Servlet/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv3/target/classes/Servlet/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appv3/target/classes/Servlet/RESTClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv3/target/classes/Servlet/RESTClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appv3/target/classes/SessionBeans/EntitiesSB.class" beforeDir="false" afterPath="$PROJECT_DIR$/../appv3/target/classes/SessionBeans/EntitiesSB.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,10 +47,14 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1T6h37k88vyGMmeFZ4NNsBqP1eV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../appv2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15429688" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
@@ -151,6 +158,9 @@
       <workItem from="1572891958442" duration="183000" />
       <workItem from="1572897184382" duration="3709000" />
       <workItem from="1572983899039" duration="7000" />
+      <workItem from="1573939255360" duration="119000" />
+      <workItem from="1573939396663" duration="211000" />
+      <workItem from="1573947312489" duration="19000" />
     </task>
     <servers />
   </component>
