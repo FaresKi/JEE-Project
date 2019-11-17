@@ -7,13 +7,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-        <link rel="stylesheet" type="text/css" href="dashboard.css">
-    </head>
-    <body>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="dashboard.css">
+</head>
+
+<body>
     <section class="hero is-light-blue is-fullheight">
         <div class="hero-body">
             <div class="container">
@@ -23,7 +25,7 @@
                             <div class="field">
                                 <label class="label">Login</label>
                                 <div class="control has-icons-left">
-                                    <input placeholder="Donald Trump" name="login"  class="input" required >
+                                    <input placeholder="Donald Trump" name="login" class="input" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
@@ -39,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="field is-centered">
-                                <button class="button is-info"  type="submit" name="action" value="Submit">
+                                <button class="button is-info" type="submit" name="action" value="Submit">
                                     Login
                                 </button>
                             </div>
@@ -49,5 +51,6 @@
             </div>
         </div>
     </section>
-    </body>
+</body>
+
 </html>

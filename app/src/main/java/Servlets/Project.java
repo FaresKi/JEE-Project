@@ -145,11 +145,11 @@ public class Project extends HttpServlet {
         if (request.getParameter("logout") != null) {
             if (session.getAttribute("user") != null) {
                 session.removeAttribute("user");
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("logout.html");
 
             } else if (session.getAttribute("admin") != null) {
                 session.removeAttribute("admin");
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("logout.html");
             }
         }
     }
