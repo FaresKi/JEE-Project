@@ -55,7 +55,7 @@ public class Project extends HttpServlet {
         session = request.getSession();
         session.setAttribute("selected", selected);
         if (userName != null) {
-            if (userName.isEmpty() || password.isEmpty()) {
+            if ((userName.isEmpty() || password.isEmpty())  && request.getParameter("action")!=null) {
                 session.setAttribute("emptyFields", true);
                 request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
             }

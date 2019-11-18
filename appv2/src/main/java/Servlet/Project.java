@@ -55,22 +55,34 @@ public class Project extends HttpServlet {
         session = request.getSession();
         session.setAttribute("selected", selected);
         if (userName != null) {
-            System.out.println("not null");
-            loggedUser = entitiesSB.getUser(userName, password);
-            if (loggedUser.getAdmin()) {
-                session.setAttribute("admin", loggedUser);
-                session.setAttribute("listEmp", employees);
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
-            } else {
-                session.setAttribute("user", loggedUser);
-                session.setAttribute("listEmp", employees);
-                request.getRequestDispatcher("home.jsp").forward(request, response);
+            if (userName.isEmpty() || password.isEmpty() && request.getParameter("action") != null) {
+                session.setAttribute("emptyFields", true);
+                request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            }
+            if (!userName.isEmpty() && !password.isEmpty()) {
+                loggedUser = entitiesSB.getUser(userName, password);
+                if (loggedUser == null) {
+                    session.setAttribute("foundUser", false);
+                    request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+                } else {
+                    if (loggedUser.getAdmin()) {
+                        session.setAttribute("foundUser", true);
+                        session.setAttribute("admin", loggedUser);
+                        session.setAttribute("listEmp", employees);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    } else {
+                        session.setAttribute("user", loggedUser);
+                        session.setAttribute("listEmp", employees);
+                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+                    }
+                }
+
             }
         }
 
         if (request.getSession().getAttribute("admin") != null) {
             if (request.getParameter("add") != null) {
-                request.getRequestDispatcher("add.jsp").include(request, response);
+                request.getRequestDispatcher("WEB-INF/add.jsp").include(request, response);
             }
             String addNom = request.getParameter("addNom");
             String addPrenom = request.getParameter("addPrenom");
@@ -96,18 +108,18 @@ public class Project extends HttpServlet {
 
             if (request.getParameter("modify") != null) {
                 if (request.getParameter("select") != null) {
-                    request.getRequestDispatcher("modify.jsp").include(request, response);
+                    request.getRequestDispatcher("/WEB-INF/modify.jsp").include(request, response);
                     selected = true;
                     session.setAttribute("selected", selected);
                     int id = Integer.parseInt(request.getParameter("select"));
                     Employee changedEmp = entitiesSB.getSpecificEmployee(id);
                     request.getSession().setAttribute("changedEmp", changedEmp);
                     request.getSession().setAttribute("select", id);
-                    request.getRequestDispatcher("modify.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/modify.jsp").forward(request, response);
                 } else {
                     selected = false;
                     session.setAttribute("selected", selected);
-                    request.getRequestDispatcher("admin.jsp").include(request, response);
+                    request.getRequestDispatcher("/WEB-INF/admin.jsp").include(request, response);
                 }
 
             }

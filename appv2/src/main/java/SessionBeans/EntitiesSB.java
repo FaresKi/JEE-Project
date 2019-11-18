@@ -21,13 +21,8 @@ public class EntitiesSB {
         Query q = em.createQuery(query);
         List<Employee> employees = q.getResultList();
         if (employees != null) {
-            System.out.println("c'est pas null list size : " + q.getResultList().size());
-            for (Employee emp : employees) {
-                System.out.println("id  : " + emp.getId());
-            }
             return employees;
         }
-        System.out.println("c'est null");
         return null;
     }
 
@@ -63,12 +58,12 @@ public class EntitiesSB {
 
     public User getUser(String userName, String password) {
         String queryGetUser = "SELECT u FROM User u WHERE u.username = :username AND u.password=:password";
-        User fetchedUser = (User) em.createQuery(queryGetUser).setParameter("username", userName).setParameter("password", password).getSingleResult();
-        if (fetchedUser != null) {
-            System.out.println("user not null");
+        try {
+            User fetchedUser = (User) em.createQuery(queryGetUser).setParameter("username", userName).setParameter("password", password).getSingleResult();
             return fetchedUser;
+        } catch (javax.persistence.NoResultException e) {
+            return null;
         }
-        System.out.println("user null");
-        return null;
+
     }
 }

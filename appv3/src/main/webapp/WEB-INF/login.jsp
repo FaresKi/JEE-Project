@@ -54,6 +54,12 @@
                                 Mot de passe ou utilisateur incorrects.
                             </div>
                         </c:if>
+                        <c:if test="${emptyFields}">
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                Les deux champs sont nécessaires.
+                            </div>
+                        </c:if>
                         <form method="post" action="Project">
                             <div class="field">
                                 <label class="label">Login</label>
