@@ -6,6 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
+import javax.annotation.Resource;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;

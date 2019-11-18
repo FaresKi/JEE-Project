@@ -57,25 +57,25 @@ public class Project extends HttpServlet {
         if (userName != null) {
             if (userName.isEmpty() || password.isEmpty()) {
                 session.setAttribute("emptyFields", true);
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
             }
             if (!userName.isEmpty() && !password.isEmpty()) {
                 loggedUser = entitiesSB.getUser(userName, password);
                 if (loggedUser == null) {
                     boolean foundUser = false;
                     session.setAttribute("foundUser", foundUser);
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
                 } else {
                     if (loggedUser.getAdmin()) {
                         boolean foundUser = true;
                         session.setAttribute("foundUser", foundUser);
                         session.setAttribute("admin", loggedUser);
                         session.setAttribute("listEmp", employees);
-                        request.getRequestDispatcher("admin.jsp").forward(request, response);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                     } else {
                         session.setAttribute("user", loggedUser);
                         session.setAttribute("listEmp", employees);
-                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
                     }
                 }
             }
@@ -83,7 +83,7 @@ public class Project extends HttpServlet {
 
         if (request.getSession().getAttribute("admin") != null) {
             if (request.getParameter("add") != null) {
-                request.getRequestDispatcher("add.jsp").include(request, response);
+                request.getRequestDispatcher("WEB-INF/add.jsp").include(request, response);
             }
             String addNom = request.getParameter("addNom");
             String addPrenom = request.getParameter("addPrenom");
@@ -99,7 +99,7 @@ public class Project extends HttpServlet {
                     entitiesSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
                     employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
-                    response.sendRedirect("admin.jsp");
+                    response.sendRedirect("WEB-INF/admin.jsp");
                 }
                 if (request.getParameter("retour") != null) {
                     response.sendRedirect("admin.jsp");
@@ -109,25 +109,25 @@ public class Project extends HttpServlet {
 
             if (request.getParameter("modify") != null) {
                 if (request.getParameter("select") != null) {
-                    request.getRequestDispatcher("modify.jsp").include(request, response);
+                    request.getRequestDispatcher("WEB-INF/modify.jsp").include(request, response);
                     selected = true;
                     session.setAttribute("selected", selected);
                     int id = Integer.parseInt(request.getParameter("select"));
                     Employee changedEmp = entitiesSB.getSpecificEmployee(id);
                     request.getSession().setAttribute("changedEmp", changedEmp);
                     request.getSession().setAttribute("select", id);
-                    request.getRequestDispatcher("modify.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/modify.jsp").forward(request, response);
                 } else {
                     selected = false;
                     session.setAttribute("selected", selected);
-                    request.getRequestDispatcher("admin.jsp").include(request, response);
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").include(request, response);
                 }
 
             }
             String modifiedNom = request.getParameter("modifiedNom");
             String modifiedPrenom = request.getParameter("modifiedPrenom");
             String modifiedTeldom = request.getParameter("modifiedTeldom");
-            String modifiedTelport = request.getParameter("modifiedTelPortable");
+            String modifiedTelport = request.getParameter("modifiedTelPort");
             String modifiedTelpro = request.getParameter("modifiedTelPro");
             String modifiedAdresse = request.getParameter("modifiedAdresse");
             String modifedCodePostal = request.getParameter("modifiedCodePostal");

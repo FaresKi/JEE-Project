@@ -1,7 +1,6 @@
 package Servlet;
 
 
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -12,20 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.io.IOException;
+
 
 @WebServlet(urlPatterns = {"/webapi"})
 public class RESTClient extends HttpServlet {
 
     HttpSession session;
-    String url = "http://localhost:8080/appv3/webapi/employee";
+    String url = "http://localhost:8080/appv3-1.0/webapi/employee";
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getRequestDispatcher("/restclient.jsp").include(request, response);
+        request.getRequestDispatcher("/WEB-INF/restclient.jsp").include(request, response);
         session = request.getSession();
         if (request.getParameterMap().containsKey("action")) {
             Client client = Client.create();
@@ -112,7 +111,6 @@ public class RESTClient extends HttpServlet {
 
         }
     }
-
 
 
     @Override

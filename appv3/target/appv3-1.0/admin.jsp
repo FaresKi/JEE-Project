@@ -138,6 +138,7 @@
                     <input class="button is-info" type="submit" value="Ajouter" name="add" />
                     <input class="button is-info" type="submit" value="Supprimer" name="delete" />
                     <input class="button is-info" type="submit" value="Modifier" name="modify" />
+                    <input class="button is-info" type="submit" value="REST API Client" name="restapi" />
                 </div>
 
             </form>
