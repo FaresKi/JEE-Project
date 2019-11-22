@@ -140,11 +140,11 @@ public class Project extends HttpServlet {
                     entitiesSB.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, id);
                     employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").include(request, response);
                 }
 
                 if (request.getParameter("retour") != null) {
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").include(request, response);
                 }
             }
 
@@ -156,11 +156,11 @@ public class Project extends HttpServlet {
                     entitiesSB.deleteEmployee(id);
                     employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").include(request, response);
                 } else {
                     selected = false;
                     session.setAttribute("selected", selected);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").include(request, response);
                 }
             }
 

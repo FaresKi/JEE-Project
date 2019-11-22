@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
  *
  * @author fareskissoum
  */
+@Resource(name = "DBJEE")
 @Entity
 @Table(name = "EMPLOYE")
 @NamedQueries({
