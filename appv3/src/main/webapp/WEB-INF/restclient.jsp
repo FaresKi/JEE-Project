@@ -42,7 +42,7 @@
     </select>
 
     <input type="submit" value="Send" name="action"/>
-    <input type="text" name="id">
+    <input type="text" name="employeIDEntered">
 
     <textarea name="inputTextBoxArea" id="myTextArea" cols="10" rows="10" style="resize: none">
 

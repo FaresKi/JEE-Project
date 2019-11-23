@@ -1,9 +1,8 @@
 package Servlet;
 
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import java.io.IOException;
 
 
@@ -27,31 +30,26 @@ public class RESTClient extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/restclient.jsp").include(request, response);
         session = request.getSession();
         if (request.getParameterMap().containsKey("action")) {
-            Client client = Client.create();
-            WebResource webResource = client.resource(url);
+            Client client = ClientBuilder.newClient(new ClientConfig());
+            WebTarget webTarget = client.target(url);
             String output = "";
             ClientResponse responseCall = null;
             switch (request.getParameter("selectAPICall")) {
                 case "Afficher tout les employes":
-                    responseCall = webResource.accept("application/json").get(ClientResponse.class);
+                    output = webTarget.request().get(String.class);
                     // Status 200 is successful.
-                    if (responseCall.getStatus() != 200) {
-                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
-                        session.setAttribute("response", output);
-                    } else {
-                        output = responseCall.getEntity(String.class);
-                        session.setAttribute("response", output);
-                    }
+                    //output = responseCall.getEntity(String)
+                    session.setAttribute("response", output);
+
                     break;
+
                 case "Ajouter un employe":
                     String input = request.getParameter("inputTextArea");
-                    responseCall = webResource.type("application/json").post(ClientResponse.class, input);
+                    responseCall = webTarget.request("application/json").post(Entity.json(input), ClientResponse.class);
                     // Status 200 is successful.
                     if (responseCall.getStatus() != 204 && responseCall.getStatus() != 200) {
                         output = "Failed with HTTP Error code: " + responseCall.getStatus();
-                        output += responseCall.getEntity(String.class);
-                        session.setAttribute("response", output);
-
+                        session.setAttribute("response", "ça marche pas");
                     } else {
                         output = "Succès création, pas de ressources retournées";
                         session.setAttribute("response", output);
@@ -61,22 +59,15 @@ public class RESTClient extends HttpServlet {
 
 
                 case "Afficher un employe":
-                    responseCall = webResource.path(request.getParameter("employeIDEntered")).accept("application/json").get(ClientResponse.class);
-                    // Status 200 is successful.
-                    if (responseCall.getStatus() != 200) {
-                        output = "Failed with HTTP Error code: " + responseCall.getStatus();
-                        session.setAttribute("response", output);
-
-                    } else {
-                        output = responseCall.getEntity(String.class);
-                        session.setAttribute("response", output);
-
-                    }
+                    webTarget = client.target(url + "/" + request.getParameter("employeIDEntered"));
+                    output = webTarget.request("application/json").get(String.class);
+                    session.setAttribute("response", output);
                     break;
 
 
                 case "Supprimer un employe":
-                    responseCall = webResource.path(request.getParameter("employeIDEntered")).accept("application/json").delete(ClientResponse.class);
+                    webTarget = client.target(url + "/" + request.getParameter("employeIDEntered"));
+                    responseCall = webTarget.request("application/json").delete(ClientResponse.class);
                     // Status 200 is successful.
                     if (responseCall.getStatus() != 200 && responseCall.getStatus() != 204) {
                         output = "Failed with HTTP Error code: " + responseCall.getStatus();
@@ -91,11 +82,10 @@ public class RESTClient extends HttpServlet {
 
                 case "Modifier un employe":
                     String inputArea = request.getParameter("inputTextArea");
-                    responseCall = webResource.path(request.getParameter("employeIDEntered")).type("application/json").put(ClientResponse.class, inputArea);
+                    responseCall = webTarget.path(request.getParameter("employeIDEntered")).request("application/json").put(Entity.json(inputArea), ClientResponse.class);
                     // Status 200 is successful.
                     if (responseCall.getStatus() != 204 && responseCall.getStatus() != 200) {
                         output = "Failed with HTTP Error code: " + responseCall.getStatus();
-                        output += responseCall.getEntity(String.class);
                         session.setAttribute("response", output);
 
                     } else {
@@ -104,11 +94,7 @@ public class RESTClient extends HttpServlet {
 
                     }
                     break;
-
-
             }
-
-
         }
     }
 
