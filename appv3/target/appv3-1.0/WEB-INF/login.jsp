@@ -1,45 +1,13 @@
-<%-- 
-    Document   : login
-    Created on : 17 Oct 2019, 10:03:21
-    Author     : tomklotz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<style>
-    .alert {
-        padding: 20px;
-        background-color: #f44336;
-        /* Red */
-        color: white;
-        margin-bottom: 15px;
-    }
-
-    /* The close button */
-    .closebtn {
-        margin-left: 15px;
-        color: white;
-        font-weight: bold;
-        float: right;
-        font-size: 22px;
-        line-height: 20px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    /* When moving the mouse over the close button */
-    .closebtn:hover {
-        color: black;
-    }
-</style>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Login Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./dashboard.css">
 </head>
 
 <body>
@@ -48,16 +16,9 @@
             <div class="container">
                 <div class="columns is-centered">
                     <div class="column is-white has-shadow is-5-tablet is-4-desktop is-3-widescreen">
-                        <c:if test="${!foundUser}">
-                            <div class="alert">
-                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                                Mot de passe ou utilisateur incorrects.
-                            </div>
-                        </c:if>
-                        <c:if test="${emptyFields}">
-                            <div class="alert">
-                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                                Les deux champs sont nécessaires.
+                        <c:if test="${not empty errorConnection}">
+                            <div class="notification is-danger">
+                                Echec de la connexion! Verifiez votre login et/ou mot de passe et essayer à nouveau                            
                             </div>
                         </c:if>
                         <form method="post" action="Project">
