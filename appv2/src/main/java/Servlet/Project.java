@@ -98,10 +98,10 @@ public class Project extends HttpServlet {
                     entitiesSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
                     employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 }
                 if (request.getParameter("retour") != null) {
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 }
 
             }
@@ -139,11 +139,11 @@ public class Project extends HttpServlet {
                     entitiesSB.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, id);
                     employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 }
 
                 if (request.getParameter("retour") != null) {
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 }
             }
 
@@ -155,11 +155,11 @@ public class Project extends HttpServlet {
                     entitiesSB.deleteEmployee(id);
                     employees = entitiesSB.getAllEmployees();
                     session.setAttribute("listEmp", employees);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 } else {
                     selected = false;
                     session.setAttribute("selected", selected);
-                    response.sendRedirect("admin.jsp");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
                 }
             }
 
