@@ -47,6 +47,7 @@ public class Project extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
+        
         String userName = (String) request.getParameter("login");
         String password = (String) request.getParameter("password");
         connection = new ConnectionClass();
@@ -54,18 +55,23 @@ public class Project extends HttpServlet {
         List<Employee> list = connection.getAllEmployees();
         session.setAttribute("listEmp", list);
         if (userName != null) {
-            if (connection.getUser(userName, password).getClass() == AdminUser.class) {
-                AdminUser admin = new AdminUser(userName, password);
-                session.setAttribute("admin", admin);
-                request.getRequestDispatcher("admin.jsp").forward(request, response);
-
+            User loggedUser = connection.getUser(userName, password);
+            if (loggedUser == null){
+                String errorConnection = "Echec de la connexion! Verifiez votre login et/ou mot de passe et essayer à nouveau";
+                session.setAttribute("errorConnection", errorConnection);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                if (loggedUser.getClass() == AdminUser.class){
+                    AdminUser admin = (AdminUser) loggedUser;
+                    session.setAttribute("admin", admin);
+                    session.setAttribute("errorConnection", "");
+                    request.getRequestDispatcher("admin.jsp").forward(request, response);
+                } else {
+                    session.setAttribute("user", loggedUser);
+                    session.setAttribute("errorConnection", "");
+                    request.getRequestDispatcher("home.jsp").forward(request, response);
+                }
             }
-            if (connection.getUser(userName, password).getClass() == User.class) {
-                User user = new User(userName, password);
-                session.setAttribute("user", user);
-                request.getRequestDispatcher("home.jsp").forward(request, response);
-            }
-
         }
 
         //Ajout
