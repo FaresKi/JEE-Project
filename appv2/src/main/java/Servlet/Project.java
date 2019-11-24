@@ -20,9 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author fareskissoum
- */
 @WebServlet(urlPatterns = {"/Project"})
 public class Project extends HttpServlet {
 
@@ -49,130 +46,134 @@ public class Project extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String userName = request.getParameter("login");
         String password = request.getParameter("password");
-        User loggedUser;
         employees = new ArrayList<>();
         employees = entitiesSB.getAllEmployees();
         session = request.getSession();
-        session.setAttribute("selected", selected);
-        if (userName != null) {
-            if (userName.isEmpty() || password.isEmpty() && request.getParameter("action") != null) {
-                session.setAttribute("emptyFields", true);
-                request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
-            }
-            if (!userName.isEmpty() && !password.isEmpty()) {
-                loggedUser = entitiesSB.getUser(userName, password);
-                if (loggedUser == null) {
-                    session.setAttribute("foundUser", false);
-                    request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
-                } else {
-                    if (loggedUser.getAdmin()) {
-                        session.setAttribute("foundUser", true);
-                        session.setAttribute("admin", loggedUser);
-                        session.setAttribute("listEmp", employees);
-                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                    } else {
-                        session.setAttribute("user", loggedUser);
-                        session.setAttribute("listEmp", employees);
-                        request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-                    }
-                }
+        session.setAttribute("listEmp", employees);
+        session.setAttribute("errorAdd", false);
+        session.setAttribute("emplSelected", true);
+        session.setAttribute("emplDeleted", false);
 
+        // Login
+        if (userName != null) {
+            User loggedUser = entitiesSB.getUser(userName, password);
+            if (loggedUser == null){
+                String errorConnection = "errorConnection";
+                session.setAttribute("errorConnection", errorConnection);
+                request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            } else {
+                if (loggedUser.getAdmin()){
+                    session.setAttribute("admin", loggedUser);
+                    session.setAttribute("errorConnection", "");
+                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                } else {
+                    session.setAttribute("user", loggedUser);
+                    session.setAttribute("errorConnection", "");
+                    request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+                }
             }
         }
 
-        if (request.getSession().getAttribute("admin") != null) {
-            if (request.getParameter("add") != null) {
-                request.getRequestDispatcher("WEB-INF/add.jsp").include(request, response);
+        // Redirection des boutons Ajouter/Modfier/Supprimer
+        String action = request.getParameter("action");
+        if (action != null && session.getAttribute("admin") != null){
+            switch (action) {
+                case "Ajouter":
+                    session.setAttribute("action", action);
+                    request.getRequestDispatcher("WEB-INF/add.jsp").forward(request, response);
+                    break;
+                
+                case "Modifier":
+                    if (request.getParameter("idEmpl") == null){
+                        session.setAttribute("emplSelected", false);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    } else {
+                        Integer idEmpl = Integer.parseInt(request.getParameter("idEmpl"));
+                        Employee changedEmp = entitiesSB.getSpecificEmployee(idEmpl);
+                        session.setAttribute("changedEmp", changedEmp);
+                        session.setAttribute("idEmpl", idEmpl);
+                        session.setAttribute("action", action);
+                        session.setAttribute("emplSelected", true);
+                        request.getRequestDispatcher("WEB-INF/modify.jsp").forward(request, response);
+                    }
+                    break;
+
+                case "Supprimer":
+                    if (request.getParameter("idEmpl") == null){
+                        session.setAttribute("emplSelected", false);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    } else {
+                        Integer idEmpl = Integer.parseInt(request.getParameter("idEmpl"));
+                        entitiesSB.deleteEmployee(idEmpl);
+                        employees = entitiesSB.getAllEmployees();
+                        session.setAttribute("listEmp", employees);
+                        session.setAttribute("emplSelected", true);
+                        session.setAttribute("emplDeleted", true);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    }
+                    break;
             }
-            String addNom = request.getParameter("addNom");
-            String addPrenom = request.getParameter("addPrenom");
-            String addTeldom = request.getParameter("addTeldom");
-            String addTelport = request.getParameter("addTelport");
-            String addTelpro = request.getParameter("addTelpro");
-            String addAdresse = request.getParameter("addAdresse");
-            String addCodePostal = request.getParameter("addCodePostal");
-            String addVille = request.getParameter("addVille");
-            String addEmail = request.getParameter("addEmail");
-            if (addNom != null) {
-                if (request.getParameter("confirm") != null) {
-                    entitiesSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
-                    employees = entitiesSB.getAllEmployees();
-                    session.setAttribute("listEmp", employees);
-                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                }
-                if (request.getParameter("retour") != null) {
-                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                }
+        }
 
+        // Gestion des actions dans les jsp add et modify
+        action = (String) session.getAttribute("action");
+        if (action != null && session.getAttribute("admin") !=null){
+            switch (action) {
+                case "Ajouter":
+                    if (request.getParameter("retour") != null) 
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    if (request.getParameter("add") != null){
+                        String addNom = (String) request.getParameter("addNom");
+                        String addPrenom = (String) request.getParameter("addPrenom");
+                        String addTeldom = (String) request.getParameter("addTeldom");
+                        String addTelport = (String) request.getParameter("addTelport");
+                        String addTelpro = (String) request.getParameter("addTelpro");
+                        String addAdresse = (String) request.getParameter("addAdresse");
+                        String addCodePostal = (String) request.getParameter("addCodePostal");
+                        String addVille = (String) request.getParameter("addVille");
+                        String addEmail = (String) request.getParameter("addEmail");
+                        try {
+                            entitiesSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
+                        } catch (Exception e) {
+                            session.setAttribute("errorAdd", true);
+                            request.getRequestDispatcher("WEB-INF/add.jsp").forward(request, response);
+                        }
+                        employees = entitiesSB.getAllEmployees();
+                        session.setAttribute("listEmp", employees);
+                        session.setAttribute("errorAdd", false);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    }
+
+                    break;
+                
+                case "Modifier":
+                    if (request.getParameter("retour") != null) 
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    if (request.getParameter("modify") != null){
+                        String modifiedNom = (String) request.getParameter("modifiedNom");
+                        String modifiedPrenom = (String) request.getParameter("modifiedPrenom");
+                        String modifiedTeldom = (String) request.getParameter("modifiedTeldom");
+                        String modifiedTelport = (String) request.getParameter("modifiedTelPortable");
+                        String modifiedTelpro = (String) request.getParameter("modifiedTelPro");
+                        String modifiedAdresse = (String) request.getParameter("modifiedAdresse");
+                        String modifedCodePostal = (String) request.getParameter("modifiedCodePostal");
+                        String modifiedVille = (String) request.getParameter("modifiedVille");
+                        String modifiedEmail = (String) request.getParameter("modifiedEmail");
+
+                        Integer idEmpl = (Integer) session.getAttribute("idEmpl");
+                        entitiesSB.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, idEmpl);
+                        employees = entitiesSB.getAllEmployees();
+                        session.setAttribute("listEmp", employees);
+                        request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+                    }
+                    break;
             }
+        }
 
-            if (request.getParameter("modify") != null) {
-                if (request.getParameter("select") != null) {
-                    request.getRequestDispatcher("/WEB-INF/modify.jsp").include(request, response);
-                    selected = true;
-                    session.setAttribute("selected", selected);
-                    int id = Integer.parseInt(request.getParameter("select"));
-                    Employee changedEmp = entitiesSB.getSpecificEmployee(id);
-                    request.getSession().setAttribute("changedEmp", changedEmp);
-                    request.getSession().setAttribute("select", id);
-                    request.getRequestDispatcher("/WEB-INF/modify.jsp").forward(request, response);
-                } else {
-                    selected = false;
-                    session.setAttribute("selected", selected);
-                    request.getRequestDispatcher("/WEB-INF/admin.jsp").include(request, response);
-                }
-
-            }
-            String modifiedNom = request.getParameter("modifiedNom");
-            String modifiedPrenom = request.getParameter("modifiedPrenom");
-            String modifiedTeldom = request.getParameter("modifiedTeldom");
-            String modifiedTelport = request.getParameter("modifiedTelPortable");
-            String modifiedTelpro = request.getParameter("modifiedTelPro");
-            String modifiedAdresse = request.getParameter("modifiedAdresse");
-            String modifedCodePostal = request.getParameter("modifiedCodePostal");
-            String modifiedVille = request.getParameter("modifiedVille");
-            String modifiedEmail = request.getParameter("modifiedEmail");
-
-            if (modifiedNom != null) {
-                if (request.getParameter("confirm") != null) {
-                    int id = (int) request.getSession().getAttribute("select");
-                    entitiesSB.updateEmployee(modifiedNom, modifiedPrenom, modifiedTeldom, modifiedTelport, modifiedTelpro, modifiedAdresse, modifedCodePostal, modifiedVille, modifiedEmail, id);
-                    employees = entitiesSB.getAllEmployees();
-                    session.setAttribute("listEmp", employees);
-                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                }
-
-                if (request.getParameter("retour") != null) {
-                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                }
-            }
-
-            if (request.getParameter("delete") != null) {
-                if (request.getParameter("select") != null) {
-                    selected = true;
-                    session.setAttribute("selected", selected);
-                    int id = Integer.parseInt(request.getParameter("select"));
-                    entitiesSB.deleteEmployee(id);
-                    employees = entitiesSB.getAllEmployees();
-                    session.setAttribute("listEmp", employees);
-                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                } else {
-                    selected = false;
-                    session.setAttribute("selected", selected);
-                    request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
-                }
-            }
-
-            if (request.getParameter("logout") != null) {
-                session.removeAttribute("admin");
-                response.sendRedirect("logout.html");
-            }
-
-        } else if (request.getSession().getAttribute("user") != null) {
-            if (request.getParameter("logout") != null) {
-                session.removeAttribute("user");
-                response.sendRedirect("logout.html");
-            }
+        // Deconnexion
+        if (request.getParameter("logout") != null) {
+            session.invalidate();
+            response.sendRedirect("logout.html");
         }
     }
 

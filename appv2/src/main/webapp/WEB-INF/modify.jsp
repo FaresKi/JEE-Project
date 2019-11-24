@@ -1,9 +1,3 @@
-<%-- 
-    Document   : modify
-    Created on : 20 oct. 2019, 14:43:14
-    Author     : fareskissoum
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page session="true"%>
@@ -14,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Modifier l'employé</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="../dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./dashboard.css">
 </head>
 
 <body>
@@ -117,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="buttons">
-                                <input class="button is-info" type="submit" value="Modifier" name="confirm" />
+                                <input class="button is-info" type="submit" value="Modifier" name="modify" />
                                 <input class="button is-info" type="submit" value="Retour à la liste" name="retour" />
                             </div>
                         </form>

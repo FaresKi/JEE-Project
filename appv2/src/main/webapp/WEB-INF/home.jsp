@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : 22 oct. 2019, 21:43:05
-    Author     : fareskissoum
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <%@page session="true" %>
@@ -41,7 +35,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Consultation des employés</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="../dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./dashboard.css">
 </head>
 
 <body class="is-light-blue">

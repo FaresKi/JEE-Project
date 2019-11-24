@@ -43,7 +43,6 @@ public class Project extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        
         String userName = (String) request.getParameter("login");
         String password = (String) request.getParameter("password");
         connection = new ConnectionClass();
@@ -112,6 +111,7 @@ public class Project extends HttpServlet {
                         session.setAttribute("emplDeleted", true);
                         request.getRequestDispatcher("admin.jsp").forward(request, response);
                     }
+                    break;
             }
         } 
 
