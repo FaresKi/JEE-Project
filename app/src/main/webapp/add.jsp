@@ -1,9 +1,3 @@
-<%-- 
-    Document   : add
-    Created on : 18 oct. 2019, 15:57:17
-    Author     : fareskissoum
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>

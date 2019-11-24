@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : 22 oct. 2019, 21:43:05
-    Author     : fareskissoum
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page session="true" %>

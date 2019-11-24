@@ -153,8 +153,8 @@ public class Project extends HttpServlet {
                         String modifiedNom = (String) request.getParameter("modifiedNom");
                         String modifiedPrenom = (String) request.getParameter("modifiedPrenom");
                         String modifiedTeldom = (String) request.getParameter("modifiedTeldom");
-                        String modifiedTelport = (String) request.getParameter("modifiedTelPortable");
-                        String modifiedTelpro = (String) request.getParameter("modifiedTelPro");
+                        String modifiedTelport = (String) request.getParameter("modifiedTelport");
+                        String modifiedTelpro = (String) request.getParameter("modifiedTelpro");
                         String modifiedAdresse = (String) request.getParameter("modifiedAdresse");
                         String modifedCodePostal = (String) request.getParameter("modifiedCodePostal");
                         String modifiedVille = (String) request.getParameter("modifiedVille");
