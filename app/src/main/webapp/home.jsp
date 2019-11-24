@@ -10,40 +10,13 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<style>
-    .alert {
-        padding: 20px;
-        background-color: #f44336;
-        /* Red */
-        color: white;
-        margin-bottom: 15px;
-    }
-
-    /* The close button */
-    .closebtn {
-        margin-left: 15px;
-        color: white;
-        font-weight: bold;
-        float: right;
-        font-size: 22px;
-        line-height: 20px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    /* When moving the mouse over the close button */
-    .closebtn:hover {
-        color: black;
-    }
-</style>
-
-<head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consultation des employés</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
         <link rel="stylesheet" type="text/css" href="dashboard.css">
     </head>
-    
+
     <body class="is-light-blue">
         <nav class="navbar has-shadow is-white" role="navigation" aria-label="main navigation">
             <div id="navbarBasicExample" class="navbar-menu">

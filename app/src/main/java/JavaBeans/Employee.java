@@ -9,10 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author fareskissoum
- */
 public class Employee implements Serializable {
 
     private Integer id;

@@ -5,10 +5,6 @@
  */
 package JavaBeans;
 
-/**
- *
- * @author fareskissoum
- */
 public class User {
     
     private String userName;
