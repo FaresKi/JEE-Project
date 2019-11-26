@@ -6,6 +6,9 @@
 package RestServices.service;
 
 import Entities.Employee;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -36,9 +39,15 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
     }
 
     @POST
-    @Override
     @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Employee emp) {
+    public void create(String json) {
+        ObjectMapper mapper = new ObjectMapper();
+        Employee emp = null;
+        try{
+                emp = mapper.readValue(json,Employee.class);
+        }catch(JsonProcessingException e){
+            e.printStackTrace();
+        }
         super.create(emp);
     }
 
