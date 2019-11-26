@@ -1,40 +1,8 @@
-<%-- 
-    Document   : home
-    Created on : 18 oct. 2019, 10:41:14
-    Author     : fareskissoum
---%>
-
 <%@page session="true" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
-<style>
-    .alert {
-        padding: 20px;
-        background-color: #f44336;
-        /* Red */
-        color: white;
-        margin-bottom: 15px;
-    }
-
-    /* The close button */
-    .closebtn {
-        margin-left: 15px;
-        color: white;
-        font-weight: bold;
-        float: right;
-        font-size: 22px;
-        line-height: 20px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    /* When moving the mouse over the close button */
-    .closebtn:hover {
-        color: black;
-    }
-</style>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,15 +12,19 @@
     </c:if>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./dashboard.css">
 
 </head>
 
 <body class="is-light-blue">
-    <c:if test="${!selected}">
-        <div class="alert is-alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            Veuillez sélectionner quelqu'un à modifier ou supprimer.
+    <c:if test="${!emplSelected}">
+        <div class="notification is-danger">
+            Veuillez sélectionner un employé.
+        </div>
+    </c:if>
+    <c:if test="${emplDeleted}">
+        <div class= "notification is-success">
+            Suppression réussie! 
         </div>
     </c:if>
     <nav class="navbar has-shadow is-white" role="navigation" aria-label="main navigation">
@@ -100,7 +72,7 @@
                             <tr>
                                 <td>
                                     <div class="radio">
-                                        <input type="radio" name="select" value="${emp.id}">
+                                        <input type="radio" name="idEmpl" value="${emp.id}">
                                     </div>
                                 </td>
                                 <td>
@@ -135,9 +107,9 @@
                     </table>
                 </c:if>
                 <div class="buttons">
-                    <input class="button is-info" type="submit" value="Ajouter" name="add" />
-                    <input class="button is-info" type="submit" value="Supprimer" name="delete" />
-                    <input class="button is-info" type="submit" value="Modifier" name="modify" />
+                    <input class="button is-info" type="submit" value="Ajouter" name="action" />
+                    <input class="button is-info" type="submit" value="Supprimer" name="action" />
+                    <input class="button is-info" type="submit" value="Modifier" name="action" />
                     <input class="button is-info" type="submit" value="REST API Client" name="restapi" />
                 </div>
 

@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="buttons">
-                                <input class="button is-info" type="submit" value="Modifier" name="confirm" />
+                                <input class="button is-info" type="submit" value="Modifier" name="modify" />
                                 <input class="button is-info" type="submit" value="Retour à la liste" name="retour" />
                             </div>
                         </form>

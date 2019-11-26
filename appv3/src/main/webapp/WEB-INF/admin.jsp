@@ -107,9 +107,9 @@
                     </table>
                 </c:if>
                 <div class="buttons">
-                    <input class="button is-info" type="submit" value="Ajouter" name="add" />
-                    <input class="button is-info" type="submit" value="Supprimer" name="delete" />
-                    <input class="button is-info" type="submit" value="Modifier" name="modify" />
+                    <input class="button is-info" type="submit" value="Ajouter" name="action" />
+                    <input class="button is-info" type="submit" value="Supprimer" name="action" />
+                    <input class="button is-info" type="submit" value="Modifier" name="action" />
                     <input class="button is-info" type="submit" value="REST API Client" name="restapi" />
                 </div>
 

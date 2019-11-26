@@ -136,9 +136,9 @@ public class Project extends HttpServlet {
                         try {
                             entitiesSB.addNewEmployee(addNom, addPrenom, addTeldom, addTelport, addTelpro, addAdresse, addCodePostal, addVille, addEmail);
                         } catch (Exception e) {
-                            session.setAttribute("errorAdd", true);
-                            request.getRequestDispatcher("WEB-INF/add.jsp").forward(request, response);
-                        }
+                    session.setAttribute("errorAdd", true);
+                    request.getRequestDispatcher("WEB-INF/add.jsp").forward(request, response);
+                }
                         employees = entitiesSB.getAllEmployees();
                         session.setAttribute("listEmp", employees);
                         session.setAttribute("errorAdd", false);
