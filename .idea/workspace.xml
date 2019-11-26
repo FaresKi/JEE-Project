@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="55ecb85d-4117-4203-92dc-6375c485d189" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/appv3/src/main/java/Entities/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/appv3/src/main/java/Entities/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appv3/src/main/java/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/appv3/src/main/java/Entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appv3/src/main/java/RestServices/service/EmployeeFacadeREST.java" beforeDir="false" afterPath="$PROJECT_DIR$/appv3/src/main/java/RestServices/service/EmployeeFacadeREST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appv3/src/main/java/RestServices/service/UserFacadeREST.java" beforeDir="false" afterPath="$PROJECT_DIR$/appv3/src/main/java/RestServices/service/UserFacadeREST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appv3/src/main/java/Servlet/RESTClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/appv3/src/main/java/Servlet/RESTClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appv3/src/main/java/SessionBeans/EntitiesSB.java" beforeDir="false" afterPath="$PROJECT_DIR$/appv3/src/main/java/SessionBeans/EntitiesSB.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1UATxq8jXXtDWM2BmW32Lztq4VQ" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/Downloads/example" value="PREVIEW" />
+        <entry key="$USER_HOME$/EFREI/SCALA/Example" value="PREVIEW" />
+        <entry key="$USER_HOME$/EFREI/SCALA/TP/SPARKLAB/spark-lab-json" value="PREVIEW" />
+        <entry key="$USER_HOME$/EFREI/SCALA/test" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="55ecb85d-4117-4203-92dc-6375c485d189" name="Default Changelist" comment="" />
+      <created>1574798648642</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574798648642</updated>
+      <workItem from="1574798649948" duration="427000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

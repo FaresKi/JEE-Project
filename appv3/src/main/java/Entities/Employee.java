@@ -21,6 +21,8 @@ import javax.validation.constraints.Size;
 /**
  *
  * @author fareskissoum
+ * @version 3.0.0
+ *
  */
 @Resource(name = "DBJEE")
 @Entity
@@ -40,40 +42,81 @@ import javax.validation.constraints.Size;
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * Represent employee ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    /**
+     * Represent employee's name
+     */
     @Size(max = 255)
     @Column(name = "NOM")
     private String nom;
+    /**
+     * Represent employee's surname
+     */
     @Size(max = 255)
     @Column(name = "PRENOM")
     private String prenom;
+    /**
+     * Represent employee's house phone number
+     */
     @Size(max = 255)
     @Column(name = "TELDOMICILE")
     private String telDomicile;
+    /**
+     * Represent employee's personal phone number
+     */
     @Size(max = 255)
     @Column(name = "TELPORTABLE")
     private String telPortable;
+    /**
+     * Represent employee's professional phone number
+     */
     @Size(max = 255)
     @Column(name = "TELPRO")
     private String telPro;
+    /**
+     * Represent employee's adress
+     */
     @Size(max = 255)
     @Column(name = "ADRESSE")
     private String adresse;
+    /**
+     * Represent employee's zipcode
+     */
     @Size(max = 255)
     @Column(name = "CODEPOSTAL")
     private String codePostal;
+    /**
+     * Represent employee's city
+     */
     @Size(max = 255)
     @Column(name = "VILLE")
     private String ville;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    /**
+     * Represent employee's email
+     */
     @Size(max = 255)
     @Column(name = "EMAIL")
     private String email;
 
+    /**
+     * This is our constructor
+     * @param nom
+     * @param prenom
+     * @param telDomicile
+     * @param telPortable
+     * @param telPro
+     * @param adresse
+     * @param codePostal
+     * @param ville
+     * @param email
+     */
     public Employee(String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email) {
         this.nom = nom;
         this.prenom = prenom;
@@ -86,93 +129,179 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
+    /**
+     * This is an empty constructor
+     */
     public Employee() {
     }
 
     public Employee(int id) {
         this.id = id;
     }
-
+    /**
+     * This is an getter for ID
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * This is an setter for ID
+     * @param  id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * This is an getter for name
+     * @return nom
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * This is an setter for name
+     * @param nom
+     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    /**
+     * This is an getter for surname
+     * @return prenom
+     */
     public String getPrenom() {
         return prenom;
     }
 
+    /**
+     * This is an setter for surname
+     * @param prenom
+     */
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
+    /**
+     * This is an getter for house phone number
+     * @return telDomicile
+     */
     public String getTelDomicile() {
         return telDomicile;
     }
 
+    /**
+     * This is an setter for house phone number
+     * @param teldomicile
+     */
     public void setTelDomicile(String teldomicile) {
         this.telDomicile = teldomicile;
     }
 
+    /**
+     * This is an getter for personal phone number
+     * @return telPortable
+     */
     public String getTelPortable() {
         return telPortable;
     }
 
-    public void setTelPortable(String telportable) {
-        this.telPortable = telportable;
+    /**
+     * This is an setter for personal phone number
+     * @param telPortable
+     */
+    public void setTelPortable(String telPortable) {
+        this.telPortable = telPortable;
     }
 
+    /**
+     * This is an getter for professional phone number
+     * @return telPro
+     */
     public String getTelPro() {
         return telPro;
     }
 
-    public void setTelPro(String telpro) {
-        this.telPro = telpro;
+    /**
+     * This is an setter for  profesional phone number
+     * @param telPro
+     */
+    public void setTelPro(String telPro) {
+        this.telPro = telPro;
     }
 
+    /**
+     * This is an getter for adress
+     * @return adresse
+     */
     public String getAdresse() {
         return adresse;
     }
 
+    /**
+     * This is an setter for adress
+     * @param adresse
+     */
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
 
+    /**
+     * This is an getter for zipcode
+     * @return codePostal
+     */
     public String getCodePostal() {
         return codePostal;
     }
 
+    /**
+     * This is an setter for zipcode
+     * @param codepostal
+     */
     public void setCodePostal(String codepostal) {
         this.codePostal = codepostal;
     }
 
+    /**
+     * This is an getter for city
+     * @return ville
+     */
     public String getVille() {
         return ville;
     }
 
+    /**
+     * This is an setter for city
+     * @param ville
+     */
     public void setVille(String ville) {
         this.ville = ville;
     }
 
+    /**
+     * This is an getter for email
+     * @return email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * This is an setter for email
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * This is an override oh the hashcode method
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -180,6 +309,10 @@ public class Employee implements Serializable {
         return hash;
     }
 
+    /**
+     * This is an override of equals method
+     * @return boolean
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -193,9 +326,12 @@ public class Employee implements Serializable {
         return true;
     }
 
+    /**
+     * This is an override of to string method
+     * @return string
+     */
     @Override
     public String toString() {
         return "Entities.Employe[ id=" + id + " ]";
     }
-    
 }
