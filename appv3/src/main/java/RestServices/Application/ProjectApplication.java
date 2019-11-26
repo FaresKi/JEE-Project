@@ -17,5 +17,4 @@ public class ProjectApplication extends Application {
         h.add(UserFacadeREST.class);
         return h;
     }
-
 }

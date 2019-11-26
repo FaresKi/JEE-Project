@@ -35,6 +35,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
         super(User.class);
     }
 
+    /**
+     * POST
+     * Add new User
+     *
+     * @param user
+     */
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -42,6 +48,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
         super.create(user);
     }
 
+    /**
+     * PUT
+     * Mofidy User
+     *
+     * @param user
+     */
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -49,12 +61,24 @@ public class UserFacadeREST extends AbstractFacade<User> {
         super.edit(user);
     }
 
+    /**
+     * DELETE
+     * Delete one User
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
+    /**
+     * GET
+     * get one user
+     *
+     * @return User
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -62,6 +86,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return super.find(id);
     }
 
+    /**
+     * GET
+     * get all user
+     *
+     * @return List<User>
+     */
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -69,6 +99,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return super.findAll();
     }
 
+    /**
+     * GET
+     * get range of user
+     *
+     * @return List<User>
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -76,6 +112,12 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return super.findRange(new int[]{from, to});
     }
 
+    /**
+     * GET
+     * get number of user
+     *
+     * @return String
+     */
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -83,6 +125,11 @@ public class UserFacadeREST extends AbstractFacade<User> {
         return String.valueOf(super.count());
     }
 
+    /**
+     * getter of entity manager
+     *
+     * @return EntityManager
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;

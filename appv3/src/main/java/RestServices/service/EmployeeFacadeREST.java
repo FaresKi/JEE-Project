@@ -35,6 +35,12 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
         super(Employee.class);
     }
 
+    /**
+     * POST
+     * Add new Employee
+     *
+     * @param emp
+     */
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_JSON})
@@ -42,6 +48,13 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
         super.create(emp);
     }
 
+    /**
+     * PUT
+     * Mofidy Employee
+     *
+     * @param id
+     * @param emp
+     */
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
@@ -78,12 +91,24 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
 
     }
 
+    /**
+     * DELETE
+     * Delete one Employee
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
+    /**
+     * GET
+     * get one employee
+     *
+     * @return Employee
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -91,6 +116,12 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
         return em.find(Employee.class,id);
     }
 
+    /**
+     * GET
+     * get all employee
+     *
+     * @return List<Employee>
+     */
     @GET
     @Override
     @Produces({MediaType.APPLICATION_JSON})
@@ -98,6 +129,12 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
         return super.findAll();
     }
 
+    /**
+     * GET
+     * get range of employees
+     *
+     * @return List<Employee>
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -105,6 +142,12 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
         return super.findRange(new int[]{from, to});
     }
 
+    /**
+     * GET
+     * get number of employees
+     *
+     * @return String
+     */
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -112,6 +155,11 @@ public class EmployeeFacadeREST extends AbstractFacade<Employee> {
         return String.valueOf(super.count());
     }
 
+    /**
+     * getter of entity manager
+     *
+     * @return EntityManager
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;

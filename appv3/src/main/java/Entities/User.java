@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 /**
  *
  * @author fareskissoum
+ * @version 3.0.0
  */
 @Entity
 @Table(name = "UTILISATEUR")
@@ -34,27 +35,41 @@ import javax.validation.constraints.Size;
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * Represent User ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    /**
+     * Represent User username
+     */
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "USERNAME")
     private String username;
+    /**
+     * Represent User password
+     */
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "PASSWORD")
     private String password;
+    /**
+     * Represent User right
+     */
     @Basic(optional = false)
     @NotNull
     @Column(name = "ADMIN")
     private boolean admin;
 
-
+    /**
+     * This is an empty constructor
+     */
     public User() {
     }
 
@@ -62,44 +77,84 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    /**
+     * This is our constructor
+     * @param username
+     * @param password
+     */
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    /**
+     * This is an getter for ID
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * This is an setter for id
+     * @param username
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * This is an getter for username
+     * @return username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * This is an setter for username
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * This is an getter for password
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * This is an setter for password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * This is an getter for right
+     * @return admin
+     */
     public boolean getAdmin() {
         return admin;
     }
 
+    /**
+     * This is an setter for right
+     * @param void
+     */
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
 
-
+    /**
+     * This is an override oh the hashcode method
+     * @return hash
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,6 +162,10 @@ public class User implements Serializable {
         return hash;
     }
 
+    /**
+     * This is an override of equals method
+     * @return boolean
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -120,6 +179,10 @@ public class User implements Serializable {
         return true;
     }
 
+    /**
+     * This is an override of to string method
+     * @return string
+     */
     @Override
     public String toString() {
         return "Entities.Utilisateur[ id=" + id + " ]";
