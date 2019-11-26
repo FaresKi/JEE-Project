@@ -30,8 +30,6 @@ public class Project extends HttpServlet {
 
     HttpSession session;
 
-    boolean selected = true;
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

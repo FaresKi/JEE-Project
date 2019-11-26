@@ -1,9 +1,3 @@
-<%-- 
-    Document   : add
-    Created on : 18 oct. 2019, 15:57:17
-    Author     : fareskissoum
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ajouter Employé</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="dashboard.css">
+    <link rel="stylesheet" type="text/css" href="./dashboard.css">
 </head>
 
 <body>
@@ -110,6 +104,11 @@
                                 <input class="button is-info" type="submit" value="Ajouter" name="confirm" />
                                 <input class="button is-info" type="submit" value="Retour à la liste" name="retour" />
                             </div>
+                            <c:if test="${errorAdd}">
+                                <div class="notification is-danger">
+                                    Echec de l'Ajout!
+                                </div>
+                            </c:if>
                         </form>
 
                     </div>
