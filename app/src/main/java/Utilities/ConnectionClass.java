@@ -20,6 +20,12 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ *
+ * @author fareskissoum
+ */
+
 public class ConnectionClass {
 
     String hostName = "jdbc:derby://localhost:1527/JEEPRJ";
@@ -46,6 +52,31 @@ public class ConnectionClass {
         pstmt.setString(8, ville);
         pstmt.setString(9, email);
         pstmt.executeUpdate();
+
+    public void addNewEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email) {
+
+        String query = "INSERT INTO EMPLOYE VALUES(?,?,?,?,?,?,?,?,?)";
+        properties.put("user", "jee");
+        properties.put("password", "jee");
+        try {
+            Connection con = DriverManager.getConnection(hostName, properties);
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setString(1, nom);
+            pstmt.setString(2, prenom);
+            pstmt.setString(3, teldom);
+            pstmt.setString(4, telport);
+            pstmt.setString(5, telpro);
+            pstmt.setString(6, adresse);
+            pstmt.setString(7, codePostal);
+            pstmt.setString(8, ville);
+            pstmt.setString(9, email);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public List<Employee> getAllEmployees() throws SQLException {
@@ -68,7 +99,9 @@ public class ConnectionClass {
             String codePostal = rs.getString("CODEPOSTAL");
             String ville = rs.getString("VILLE");
             String email = rs.getString("EMAIL");
+
             emp = new Employee(id, nom, prenom, teldom, telport, telpro, adresse, codePostal, ville, email);
+
             list.add(emp);
         }
         return list;
@@ -82,8 +115,6 @@ public class ConnectionClass {
         Connection con = DriverManager.getConnection(hostName, properties);
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, id.toString());
-        pstmt.executeUpdate();
-
     }
 
     public Employee getSpecificEmployee(Integer id) throws SQLException {
@@ -110,12 +141,13 @@ public class ConnectionClass {
         return emp;
     }
 
-    public void updateEmployee(Integer id, String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email) throws SQLException {
+    public void updateEmployee(String nom, String prenom, String teldom, String telport, String telpro, String adresse, String codePostal, String ville, String email, String selectName) throws SQLException {
         properties.put("user", "jee");
         properties.put("password", "jee");
-        String query = "UPDATE EMPLOYEE "
+        String query = "UPDATE EMPLOYE "
                 + "SET NOM=?,PRENOM=?,TELDOMICILE=?,  TELPORTABLE=?,  TELPRO=?, ADRESSE=?,  CODEPOSTAL=?,  VILLE=?, EMAIL=? "
-                + "WHERE ID=?";
+                + "WHERE NOM=?";
+      
         Connection con = DriverManager.getConnection(hostName, properties);
         PreparedStatement pstmt = con.prepareStatement(query);
         pstmt.setString(1, nom);
