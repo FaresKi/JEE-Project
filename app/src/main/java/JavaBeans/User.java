@@ -5,10 +5,6 @@
  */
 package JavaBeans;
 
-/**
- *
- * @author fareskissoum
- */
 public class User {
     
     private String userName;
@@ -34,7 +30,5 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
-    
-    
-    
+
 }

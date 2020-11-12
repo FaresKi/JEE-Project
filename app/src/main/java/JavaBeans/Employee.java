@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  *
  * @author fareskissoum
@@ -97,6 +98,7 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
+
     public Employee(String nom, String prenom, String telDomicile, String telPortable, String telPro, String adresse, String codePostal, String ville, String email) {
         this.nom = nom;
         this.prenom = prenom;
@@ -108,5 +110,4 @@ public class Employee implements Serializable {
         this.ville = ville;
         this.email = email;
     }
-
 }
